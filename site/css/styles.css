@@ -304,7 +304,7 @@ ul { margin: 0; padding: 0; }
 .site-footer a { color: var(--color-secondary); text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; color: #fff; }
 .site-footer__grid { display: grid; grid-template-columns: 1.2fr 1fr 1.4fr; gap: 2rem; }
-.site-footer__logo { filter: brightness(0) invert(1); width: 48px; height: auto; margin-bottom: 1rem; }
+.site-footer__logo { width: 48px; height: auto; margin-bottom: 1rem; }
 .site-footer__name { font-family: var(--font-heading); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #fff; margin: 0; }
 .site-footer__tag { color: var(--color-secondary); margin: 0; }
 .site-footer__h { font-size: .75rem; letter-spacing: .14em; color: var(--color-secondary); margin-bottom: 1rem; }

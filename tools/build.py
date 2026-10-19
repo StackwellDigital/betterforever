@@ -211,7 +211,7 @@ def footer():
     return f"""<footer class="site-footer">
   <div class="container site-footer__grid">
     <div>
-      <img class="site-footer__logo" src="/img/logo.png" width="60" height="70" alt="" loading="lazy" decoding="async">
+      <img class="site-footer__logo" src="/img/logo-white.png" width="60" height="70" alt="" loading="lazy" decoding="async">
       <p class="site-footer__name">{NAME}</p>
       <p class="site-footer__tag">{TAGLINE}</p>
     </div>
