@@ -58,7 +58,7 @@
   --header-h: 72px;
 
   /* Hero photo: drop the file in /img/. If it is missing the gradient still looks intentional. */
-  --hero-img: url("/img/joel-and-clients.avif");
+  --hero-img: url("/img/hero.jpg");
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -358,3 +358,10 @@ ul { margin: 0; padding: 0; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
   .btn:hover, .card--link:hover { transform: none; }
 }
+
+/* ---------- photos ---------- */
+.photo { margin: 0; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); background: var(--color-sage, #cfe6bf); }
+.photo img { display: block; width: 100%; height: auto; }
+.photo--tall { max-width: 26rem; margin-inline: auto; }
+.photo--mt { margin-top: var(--space-lg); }
+.grid--center { align-items: center; }

@@ -349,7 +349,8 @@ def build_home():
 </section>
 
 <section class="section section--sage" aria-labelledby="why-h">
-  <div class="container prose-wide">
+  <div class="container grid grid--2 grid--center">
+    <div>
     <p class="eyebrow">Why we exist</p>
     <h2 id="why-h" class="statement">We believe no one should suffer life-limiting pain, and no one should accept &ldquo;good enough&rdquo; for their body.</h2>
     <p class="lede">Through an integrated, multimodal approach we move you from pain to function to performance - and keep you there.</p>
@@ -357,6 +358,8 @@ def build_home():
       {book_btn("Book Now", "btn--primary")}
       <a class="btn btn--outline" href="/team/">Meet the team {ARROW}</a>
     </div>
+  </div>
+    <figure class="photo photo--tall"><img src="/img/physio-2.jpg" width="900" height="1348" alt="Hands-on manual therapy on the shoulder" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 """
@@ -406,6 +409,7 @@ def build_pain():
         "Felt like you've tried everything and you're not getting better",
         "Daily pain sits like a cloud over everyday life",
         "Can't play with your kids, having to say no to social events"])}
+      <figure class="photo photo--mt"><img src="/img/physio-1.jpg" width="1200" height="801" alt="A therapist guiding a client through a hands-on leg mobilization" loading="lazy" decoding="async"></figure>
     </div>
     <div class="panel panel--green">
       <p class="eyebrow eyebrow--light">What's possible</p>
@@ -520,13 +524,16 @@ def build_perform():
 </section>
 
 <section class="section section--white" id="athletes" aria-labelledby="athletes-h">
-  <div class="container">
-    <header class="section-head section-head--center">
+  <div class="container grid grid--2 grid--center">
+    <figure class="photo photo--tall"><img src="/img/perform.jpg" width="900" height="1350" alt="A sprinter running on a track at sunset" loading="lazy" decoding="async"></figure>
+    <div>
+    <header class="section-head">
       <p class="eyebrow">Athletes we train</p>
       <h2 id="athletes-h">Olympic. Collegiate. Professional.</h2>
       <p class="lede">We've worked with athletes across every level - from juniors chasing their first scholarship to pros chasing the next title.</p>
     </header>
     <ul class="chips">{chips}</ul>
+    </div>
   </div>
 </section>
 
