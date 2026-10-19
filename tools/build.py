@@ -409,7 +409,6 @@ def build_pain():
         "Felt like you've tried everything and you're not getting better",
         "Daily pain sits like a cloud over everyday life",
         "Can't play with your kids, having to say no to social events"])}
-      <figure class="photo photo--mt"><img src="/img/physio-1.jpg" width="1200" height="801" alt="A therapist guiding a client through a hands-on leg mobilization" loading="lazy" decoding="async"></figure>
     </div>
     <div class="panel panel--green">
       <p class="eyebrow eyebrow--light">What's possible</p>
@@ -420,6 +419,7 @@ def build_pain():
         "Beyond baseline. Not just better. Better than before.",
         "Able to show up for yourself and the people you care about"])}
     </div>
+    <figure class="photo photo--banner"><img src="/img/physio-1.jpg" width="1200" height="801" alt="A therapist guiding a client through a hands-on leg mobilization" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 

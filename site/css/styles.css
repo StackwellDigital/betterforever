@@ -365,3 +365,6 @@ ul { margin: 0; padding: 0; }
 .photo--tall { max-width: 26rem; margin-inline: auto; }
 .photo--mt { margin-top: var(--space-lg); }
 .grid--center { align-items: center; }
+.photo--banner { grid-column: 1 / -1; margin-top: var(--space-md, 1.5rem); }
+.photo--banner img { aspect-ratio: 21 / 8; object-fit: cover; object-position: 50% 58%; }
+@media (max-width: 860px) { .photo--banner img { aspect-ratio: 4 / 3; } }
