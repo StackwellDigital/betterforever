@@ -1,0 +1,36 @@
+/* Style picker page + the small "All styles" chip shown on every themed page. Demo-only: remove both once a style is chosen. */
+.picker-chip { position: fixed; left: 1rem; bottom: 1rem; z-index: 9999; display: inline-flex; align-items: center; gap: .4rem; padding: .6rem 1rem; border-radius: 999px; background: #2d2a26; color: #fefbf5 !important; font: 700 .75rem/1 "Montserrat", system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; text-decoration: none !important; box-shadow: 0 8px 24px rgba(0, 0, 0, .3); border: 1px solid rgba(255, 255, 255, .25); }
+.picker-chip:hover { background: #005745; color: #fff !important; }
+@media (max-width: 560px) { .picker-chip { bottom: 4.5rem; } }
+
+/* ---- picker page ---- */
+.pk { margin: 0; background: #fefbf5; color: #2d2a26; font-family: "Open Sans", system-ui, sans-serif; line-height: 1.6; }
+.pk * { box-sizing: border-box; }
+.pk-wrap { max-width: 1280px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); }
+.pk-top { padding-block: 2.5rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.pk-brand { display: inline-flex; align-items: center; gap: .8rem; font-weight: 700; color: #005745; text-decoration: none; font-family: "Montserrat", sans-serif; letter-spacing: .06em; text-transform: uppercase; font-size: .9rem; }
+.pk-brand img { width: 34px; height: auto; }
+.pk-tag { font: 700 .72rem "Montserrat", sans-serif; letter-spacing: .14em; text-transform: uppercase; background: #cfe6bf; color: #004536; padding: .45rem .9rem; border-radius: 999px; }
+.pk-hero { padding-block: clamp(1.5rem, 4vw, 3rem) clamp(2rem, 4vw, 3.5rem); max-width: 54rem; }
+.pk-hero h1 { font-family: "Fraunces", Georgia, serif; font-weight: 500; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1; letter-spacing: -.03em; color: #005745; margin: 0 0 1.25rem; }
+.pk-hero h1 em { font-weight: 400; color: #2d2a26; }
+.pk-hero p { font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: #5f574e; margin: 0; max-width: 40rem; }
+.pk-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5rem; padding-bottom: 3rem; }
+.pk-card { grid-column: span 2; display: flex; flex-direction: column; background: #fff; border: 1px solid rgba(45, 42, 38, .14); border-radius: 18px; overflow: hidden; text-decoration: none; color: inherit; transition: transform .25s cubic-bezier(.2, .7, .2, 1), box-shadow .25s cubic-bezier(.2, .7, .2, 1); }
+.pk-card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(0, 69, 54, .16); }
+.pk-card:nth-child(1), .pk-card:nth-child(2) { grid-column: span 3; }
+.pk-shot { position: relative; aspect-ratio: 16 / 10; background: #cfe6bf; overflow: hidden; border-bottom: 1px solid rgba(45, 42, 38, .12); }
+.pk-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.pk-card:hover .pk-shot img { transform: scale(1.03); }
+.pk-num { position: absolute; top: .85rem; left: .85rem; width: 2.2rem; height: 2.2rem; display: grid; place-items: center; border-radius: 50%; background: #005745; color: #fff; font: 700 .8rem "Montserrat", sans-serif; box-shadow: 0 4px 12px rgba(0, 0, 0, .25); }
+.pk-body { padding: 1.25rem 1.4rem 1.5rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
+.pk-body h2 { margin: 0; font-family: "Fraunces", Georgia, serif; font-weight: 500; font-size: 1.6rem; letter-spacing: -.02em; color: #005745; }
+.pk-body p { margin: 0; font-size: .95rem; color: #5f574e; }
+.pk-feel { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .25rem; }
+.pk-feel span { font: 600 .66rem "Montserrat", sans-serif; letter-spacing: .1em; text-transform: uppercase; padding: .3rem .65rem; border-radius: 999px; background: #f2eee6; color: #4a443d; }
+.pk-go { margin-top: auto; padding-top: .75rem; font: 700 .75rem "Montserrat", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #005745; display: inline-flex; align-items: center; gap: .5rem; }
+.pk-card:hover .pk-go { gap: .9rem; }
+.pk-note { border-top: 1px solid rgba(45, 42, 38, .15); padding-block: 1.75rem 3rem; color: #5f574e; font-size: .95rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
+.pk-note strong { color: #2d2a26; }
+@media (max-width: 900px) { .pk-grid { grid-template-columns: 1fr 1fr; } .pk-card, .pk-card:nth-child(1), .pk-card:nth-child(2) { grid-column: span 1; } .pk-card:last-child { grid-column: span 2; } .pk-note { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .pk-grid { grid-template-columns: 1fr; } .pk-card:last-child { grid-column: span 1; } }

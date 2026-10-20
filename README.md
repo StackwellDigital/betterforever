@@ -1,3 +1,16 @@
+# Style picker (current demo state)
+
+`/` is a style picker. Five complete copies of the site live in `/classic/`, `/editorial/`, `/bold/`, `/soft/` and `/studio/`.
+Shared assets (`img/`, `fonts/`, `js/`) stay at the site root. Each style is a CSS file in `site/css/`; Bold, Soft and Studio load on top of `editorial.css`.
+
+```
+python3 tools/build.py      # builds the picker + all five styles
+python3 tools/previews.py   # regenerates the picker thumbnails (needs playwright)
+```
+
+Once a style is chosen: delete the other style folders and `css/picker.css`, set that module's `PREFIX` to `""`, and drop the "All styles" chip from `finalize()`.
+The sections below describe the original single-style layout and still apply to `tools/classic.py` / `tools/editorial.py` (page copy lives in those files).
+
 # Better Forever website
 
 Static rebuild of the Better Forever (Langley, BC) site. Plain HTML, CSS and a little vanilla JS. No framework, no build step on the host. Brand colours, fonts, copy and contact details come from the client's existing preview site.
