@@ -159,6 +159,7 @@ ARROW = ('<svg class="icon" viewBox="0 0 24 24" width="18" height="18" aria-hidd
          'stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 
+
 # ---------------------------------------------------------------- layout
 def jsonld_clinic():
     data = {
@@ -199,7 +200,7 @@ def header(current):
       <div class="site-nav__group">{left}</div>
       <span class="site-nav__divider" aria-hidden="true"></span>
       <div class="site-nav__group">{right}</div>
-      <a class="btn btn--primary btn--sm site-nav__cta" href="/book/">Book Now</a>
+      <a class="btn btn--primary btn--sm site-nav__cta" href="/book/" data-jane="general">Book Now</a>
     </nav>
   </div>
 </header>"""
@@ -209,26 +210,29 @@ def footer():
     all_links = "".join(f'<li><a href="{h}">{e(l)}</a></li>' for h, l in
                         [("/", "Home")] + NAV + NAV_RIGHT + [("/book/", "Book Now")])
     return f"""<footer class="site-footer">
-  <div class="container site-footer__grid">
-    <div>
-      <img class="site-footer__logo" src="/img/logo-white.png" width="60" height="70" alt="" loading="lazy" decoding="async">
-      <p class="site-footer__name">{NAME}</p>
-      <p class="site-footer__tag">{TAGLINE}</p>
+  <div class="container">
+    <p class="site-footer__big">Find your <em>better.</em></p>
+    <div class="site-footer__grid">
+      <div>
+        <img class="site-footer__logo" src="/img/logo.png" width="60" height="70" alt="" loading="lazy" decoding="async">
+        <p class="site-footer__name">{NAME}</p>
+        <p class="site-footer__tag">Functional health, performance and pain resolution.</p>
+      </div>
+      <div>
+        <h2 class="site-footer__h">Explore</h2>
+        <ul class="site-footer__list">{all_links}</ul>
+      </div>
+      <div>
+        <h2 class="site-footer__h">Visit &amp; contact</h2>
+        <address class="site-footer__addr">
+          <a href="{MAPS_URL}" rel="noopener">{e(ADDR_STREET)}<br>{ADDR_CITY} {ADDR_REGION} {ADDR_POSTAL}</a><br>
+          <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a><br>
+          <a href="mailto:{EMAIL}">{EMAIL}</a>
+        </address>
+      </div>
     </div>
-    <div>
-      <h2 class="site-footer__h">Explore</h2>
-      <ul class="site-footer__list">{all_links}</ul>
-    </div>
-    <div>
-      <h2 class="site-footer__h">Visit &amp; contact</h2>
-      <address class="site-footer__addr">
-        <a href="{MAPS_URL}" rel="noopener">{e(ADDR_STREET)}<br>{ADDR_CITY} {ADDR_REGION} {ADDR_POSTAL}</a><br>
-        <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a><br>
-        <a href="mailto:{EMAIL}">{EMAIL}</a>
-      </address>
-    </div>
+    <div class="site-footer__legal"><p>&copy; <span id="year">2026</span> {NAME}. All rights reserved.</p></div>
   </div>
-  <div class="container site-footer__legal"><p>&copy; <span id="year">2026</span> {NAME}. All rights reserved.</p></div>
 </footer>"""
 
 
@@ -238,6 +242,7 @@ def page(path, title, desc, body, current="", schema=False, body_class=""):
     canonical = SITE_URL + (path if path.endswith("/") else "/" + path.lstrip("/"))
     robots = '<meta name="robots" content="noindex, nofollow">\n' if DEMO else ""
     ld = jsonld_clinic() if schema else ""
+    float_btn = "" if path == "/book/" else '<a class="btn btn--primary btn--sm float-book" href="/book/" data-jane="general">Book Now</a>\n'
     doc = f"""<!doctype html>
 <html lang="en-CA">
 <head>
@@ -256,7 +261,7 @@ def page(path, title, desc, body, current="", schema=False, body_class=""):
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" href="/img/logo.png">
 <link rel="apple-touch-icon" href="/img/logo.png">
-<link rel="preload" href="/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/open-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/styles.css">
 {ld}
@@ -267,7 +272,7 @@ def page(path, title, desc, body, current="", schema=False, body_class=""):
 {body}
 </main>
 {footer()}
-<script src="/js/config.js" defer></script>
+{float_btn}<script src="/js/config.js" defer></script>
 <script src="/js/main.js" defer></script>
 </body>
 </html>
@@ -279,13 +284,20 @@ def page(path, title, desc, body, current="", schema=False, body_class=""):
 
 
 # ---------------------------------------------------------------- components
-def hero(eyebrow, h1, text, ctas, extra_class=""):
-    return f"""<section class="hero {extra_class}">
-  <div class="container hero__inner">
-    {f'<p class="eyebrow eyebrow--light">{e(eyebrow)}</p>' if eyebrow else ''}
-    <h1 class="hero__title">{h1}</h1>
-    <p class="hero__text">{e(text)}</p>
-    <div class="hero__actions">{ctas}</div>
+def page_head(eyebrow, h1, text, ctas="", variant=""):
+    """Editorial page header: big serif title left, short intro + actions right."""
+    cls = f" page-head--{variant}" if variant else ""
+    actions = f'<div class="page-head__actions">{ctas}</div>' if ctas else ""
+    return f"""<section class="page-head{cls}">
+  <div class="container page-head__grid">
+    <div>
+      {f'<p class="eyebrow">{e(eyebrow)}</p>' if eyebrow else ''}
+      <h1>{h1}</h1>
+    </div>
+    <div class="page-head__side">
+      <p>{e(text)}</p>
+      {actions}
+    </div>
   </div>
 </section>"""
 
@@ -298,7 +310,7 @@ def cta_band(heading, text, label="Book Now", key="general"):
     sub = f'<p>{e(text)}</p>' if text else ""
     return f"""<section class="cta-band">
   <div class="container cta-band__inner">
-    <h2>{e(heading)}</h2>
+    <h2>{heading}</h2>
     {sub}
     {book_btn(label, "btn--light", key)}
   </div>
@@ -310,56 +322,75 @@ def check_list(items):
     return f'<ul class="check-list">{li}</ul>'
 
 
+def numbered(items, cls=""):
+    """items: list of (title, text). Rendered as an editorial numbered index."""
+    rows = "".join(
+        f'<li class="numbered__item"><h3>{e(t)}</h3><p>{e(p)}</p></li>' for t, p in items)
+    return f'<ol class="numbered {cls}">{rows}</ol>'
+
+
 # ---------------------------------------------------------------- pages
 def build_home():
-    body = hero(
-        "Functional health · Performance · Pain resolution",
-        "Find your<br>better",
-        "A fully customized approach to health and performance that takes you from where you are to where you want to be, backed by an unparalleled promise.",
-        '<a class="btn btn--light" href="#pathways">Choose Your Pathway ' + ARROW + '</a>'
-        '<a class="btn btn--ghost" href="/book/" data-jane="general">Book Now</a>',
-        "hero--home hero--tall",
-    )
-    body += f"""
-<section class="section" id="pathways" aria-labelledby="pathways-h">
-  <div class="container">
-    <header class="section-head section-head--center">
-      <p class="eyebrow">Three pathways, one promise</p>
-      <h2 id="pathways-h">Where do you want to go?</h2>
-      <p class="lede">Better Forever's approach is built around you. Whether you're sidelined with pain, just making the first step in your physical journey, or a high-level athlete at the top of your game - your ceiling is higher with Better Forever, and we guarantee it.</p>
-    </header>
-    <div class="grid grid--3">
-      <a class="card card--link" href="/pain/">
-        <h3 class="card__title">I want to get out of pain</h3>
-        <p>If pain is in the way of doing what you love, we find the real cause, and focus on the entire system - not just the painful area. Backed by our money-back promise - even if nothing else has worked.</p>
-        <span class="card__more">Get out of pain {ARROW}</span>
-      </a>
-      <a class="card card--link" href="/young-forever/">
-        <h3 class="card__title">I want to be young forever</h3>
-        <p>Want to be the next one of our clients achieving the best shape of their lives in their 40s, 50s, 60s and beyond? Stay strong, sharp, and independent - for as long as you want to be.</p>
-        <span class="card__more">Stay young forever {ARROW}</span>
-      </a>
-      <a class="card card--link" href="/perform/">
-        <h3 class="card__title">I want to dominate the competition</h3>
-        <p>World and national record-producing strength and conditioning. Used by Olympic, collegiate, and professional athletes to gain an unfair advantage. Are you next?</p>
-        <span class="card__more">Perform at my best {ARROW}</span>
-      </a>
+    body = f"""
+<section class="hero-home">
+  <div class="container hero-home__grid">
+    <div>
+      <p class="eyebrow">Functional health · Performance · Pain resolution</p>
+      <h1 class="hero-home__title">Find your <em>better.</em></h1>
+      <p class="hero-home__text">A fully customized approach to health and performance that takes you from where you are to where you want to be, backed by an unparalleled promise.</p>
+      <div class="hero-home__actions">
+        {book_btn("Book Now")}
+        <a class="text-link" href="#pathways">Choose your pathway</a>
+      </div>
     </div>
+    <figure class="hero-home__photo"><img src="/img/hero.jpg" width="1920" height="1280" alt="Better Forever coach working with clients in the gym" decoding="async" fetchpriority="high"></figure>
   </div>
 </section>
 
-<section class="section section--sage" aria-labelledby="why-h">
-  <div class="container grid grid--2 grid--center">
-    <div>
-    <p class="eyebrow">Why we exist</p>
-    <h2 id="why-h" class="statement">We believe no one should suffer life-limiting pain, and no one should accept &ldquo;good enough&rdquo; for their body.</h2>
-    <p class="lede">Through an integrated, multimodal approach we move you from pain to function to performance - and keep you there.</p>
-    <div class="btn-row">
-      {book_btn("Book Now", "btn--primary")}
-      <a class="btn btn--outline" href="/team/">Meet the team {ARROW}</a>
-    </div>
+<div class="strip" aria-hidden="true"><div class="container strip__inner"><span>Pain</span><span><b>&rarr;</b>Function</span><span><b>&rarr;</b>Performance</span><span><b>&rarr;</b>Better, forever</span></div></div>
+
+<section class="section" id="pathways" aria-labelledby="pathways-h">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">Three pathways, one promise</p>
+      <h2 id="pathways-h">Where do you <em>want</em> to go?</h2>
+      <p class="lede">Better Forever's approach is built around you. Whether you're sidelined with pain, just making the first step in your physical journey, or a high-level athlete at the top of your game - your ceiling is higher with Better Forever, and we guarantee it.</p>
+    </header>
+    <ol class="paths">
+      <li><a class="path" href="/pain/">
+        <span class="path__n">01</span>
+        <span class="path__t">I want to get out of pain</span>
+        <span class="path__d">If pain is in the way of doing what you love, we find the real cause, and focus on the entire system - not just the painful area. Backed by our money-back promise - even if nothing else has worked.</span>
+        <span class="path__go">{ARROW}</span>
+      </a></li>
+      <li><a class="path" href="/young-forever/">
+        <span class="path__n">02</span>
+        <span class="path__t">I want to be young forever</span>
+        <span class="path__d">Want to be the next one of our clients achieving the best shape of their lives in their 40s, 50s, 60s and beyond? Stay strong, sharp, and independent - for as long as you want to be.</span>
+        <span class="path__go">{ARROW}</span>
+      </a></li>
+      <li><a class="path" href="/perform/">
+        <span class="path__n">03</span>
+        <span class="path__t">I want to dominate the competition</span>
+        <span class="path__d">World and national record-producing strength and conditioning. Used by Olympic, collegiate, and professional athletes to gain an unfair advantage. Are you next?</span>
+        <span class="path__go">{ARROW}</span>
+      </a></li>
+    </ol>
   </div>
-    <figure class="photo photo--tall"><img src="/img/physio-2.jpg" width="900" height="1348" alt="Hands-on manual therapy on the shoulder" loading="lazy" decoding="async"></figure>
+</section>
+
+<section class="section section--green" aria-labelledby="why-h">
+  <div class="container why">
+    <div>
+      <p class="eyebrow eyebrow--light">Why we exist</p>
+      <h2 id="why-h" class="statement">We believe no one should suffer life-limiting pain, and no one should accept &ldquo;<em>good enough</em>&rdquo; for their body.</h2>
+      <p class="lede">Through an integrated, multimodal approach we move you from pain to function to performance - and keep you there.</p>
+      <div class="btn-row">
+        {book_btn("Book Now", "btn--light")}
+        <a class="btn btn--ghost" href="/team/">Meet the team {ARROW}</a>
+      </div>
+    </div>
+    <figure class="arch"><img src="/img/physio-2.jpg" width="900" height="1348" alt="Hands-on manual therapy on the shoulder" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 """
@@ -376,58 +407,58 @@ def build_pain():
   <h3 class="story__name">{e(name)}</h3>
   <div class="story__body">{li}</div>
   {tag_html}
-  <p class="story__count">{i:02d}/{len(STORIES):02d}</p>
+  <p class="story__count">{i:02d} / {len(STORIES):02d}</p>
 </article>""")
     dots = "".join(
         f'<button type="button" class="carousel__dot" aria-label="Show story {i} of {len(STORIES)}: {e(n)}"></button>'
         for i, (_, n, _, _) in enumerate(STORIES, 1))
 
-    body = hero(
+    body = page_head(
         "If you're in pain",
-        "Help me get out<br>of pain",
+        "Help me get out <em>of pain.</em>",
         "You're not broken. You just haven't had a system that understands your body, adapts in real time, and takes you all the way back to full function.",
-        book_btn("Book Now", "btn--light") +
-        '<a class="btn btn--ghost" href="#proof">See the proof ↓</a>',
-        "hero--pain",
+        book_btn("Book Now") + '<a class="text-link" href="#proof">See the proof</a>',
+        "sage",
     )
     body += f"""
 <section class="section section--tight" aria-label="Our guarantees">
-  <div class="container grid grid--3">
-    <div class="stat-card"><h2 class="stat-card__h">1-Month Improvement Guarantee</h2><p>You get better or you get your money back. Simple as that.</p></div>
-    <div class="stat-card"><h2 class="stat-card__h">First Session Risk Free</h2><p>Billed after you leave the building. You only pay if you found it valuable.</p></div>
-    <div class="stat-card"><h2 class="stat-card__h">95%+ Success Rate</h2><p>Including with cases that have failed elsewhere - multiple times.</p></div>
+  <div class="ribbon">
+    <div class="ribbon__item"><h2 class="ribbon__h">1-Month Improvement Guarantee</h2><p>You get better or you get your money back. Simple as that.</p></div>
+    <div class="ribbon__item"><h2 class="ribbon__h">First Session Risk Free</h2><p>Billed after you leave the building. You only pay if you found it valuable.</p></div>
+    <div class="ribbon__item"><h2 class="ribbon__h">95%+ Success Rate</h2><p>Including with cases that have failed elsewhere - multiple times.</p></div>
   </div>
 </section>
 
-<section class="section section--white" aria-labelledby="familiar-h">
+<section class="section" aria-labelledby="familiar-h">
   <div class="container grid grid--2 grid--split">
     <div>
       <p class="eyebrow">If this sounds familiar</p>
-      <h2 id="familiar-h">You know this feeling</h2>
+      <h2 id="familiar-h">You know this <em>feeling.</em></h2>
       {check_list([
         "Feeling hopeless, stuck, not sure where to turn next",
         "Felt like you've tried everything and you're not getting better",
         "Daily pain sits like a cloud over everyday life",
         "Can't play with your kids, having to say no to social events"])}
     </div>
-    <div class="panel panel--green">
+    <div class="panel panel--green on-dark">
       <p class="eyebrow eyebrow--light">What's possible</p>
-      <h2>Beyond baseline</h2>
+      <h2>Beyond <em>baseline.</em></h2>
       {check_list([
         "Live life on your own terms again",
         "Empowered to not just make it through the day - to thrive",
         "Beyond baseline. Not just better. Better than before.",
         "Able to show up for yourself and the people you care about"])}
     </div>
-    <figure class="photo photo--banner"><img src="/img/physio-1.jpg" width="1200" height="801" alt="A therapist guiding a client through a hands-on leg mobilization" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 
-<section class="section" id="proof" aria-labelledby="proof-h">
+<figure class="photo photo--banner"><img src="/img/physio-1.jpg" width="1200" height="801" alt="A therapist guiding a client through a hands-on leg mobilization" loading="lazy" decoding="async"></figure>
+
+<section class="section section--white" id="proof" aria-labelledby="proof-h">
   <div class="container">
     <header class="section-head section-head--center">
       <p class="eyebrow">Real people. Real results.</p>
-      <h2 id="proof-h">Same diagnosis. Different approach.</h2>
+      <h2 id="proof-h">Same diagnosis. <em>Different approach.</em></h2>
       <p class="lede">Six stories from people who were told it couldn't be fixed - or that this was as good as it gets.</p>
     </header>
     <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Success stories">
@@ -445,28 +476,28 @@ def build_pain():
   </div>
 </section>
 
-<section class="section section--white" aria-labelledby="diff-h">
+<section class="section" aria-labelledby="diff-h">
   <div class="container">
     <header class="section-head">
       <p class="eyebrow">A different approach for when nothing else has worked</p>
-      <h2 id="diff-h">From Pain &rarr; Function &rarr; Performance</h2>
+      <h2 id="diff-h">From pain &rarr; function &rarr; <em>performance.</em></h2>
       <p class="lede">If you've been dealing with pain, you've probably tried:</p>
       {check_list(["Rest", "Rehab exercises", "Treatments that didn't work - or made things worse", "Treatments that helped… but didn't last"])}
-      <p class="lede lede--strong">The problem isn't that nothing works.<br>It's that most approaches are incomplete.</p>
+      <p class="lede lede--strong">The problem isn't that nothing works. It's that most approaches are incomplete.</p>
     </header>
     <h3 class="subhead">What makes this different</h3>
-    <div class="grid grid--2">
-      <div class="card"><h4 class="card__title">We don't just treat the pain</h4><p>Pain is rarely the real problem. We identify why your body is moving the way it is, what your brain is protecting, and what's actually causing the breakdown.</p></div>
-      <div class="card"><h4 class="card__title">We fix the system - not just the injury</h4><p>Instead of chasing one area, we improve how your entire body works together. We build stability, control, and strength around weak points, and create a system that doesn't break down again.</p></div>
-      <div class="card"><h4 class="card__title">We get results quickly - and prove it</h4><p>Every step follows Test &rarr; Fix &rarr; Retest. If something works, you'll feel it immediately. If it doesn't, we change the approach.</p></div>
-      <div class="card"><h4 class="card__title">We build you back stronger than before</h4><p>Even if something doesn't fully heal, you can still move without pain, live life on your terms, and return to the activities you care about. Most people come back stronger and more capable than before injury.</p></div>
-    </div>
+    {numbered([
+      ("We don't just treat the pain", "Pain is rarely the real problem. We identify why your body is moving the way it is, what your brain is protecting, and what's actually causing the breakdown."),
+      ("We fix the system - not just the injury", "Instead of chasing one area, we improve how your entire body works together. We build stability, control, and strength around weak points, and create a system that doesn't break down again."),
+      ("We get results quickly - and prove it", "Every step follows Test → Fix → Retest. If something works, you'll feel it immediately. If it doesn't, we change the approach."),
+      ("We build you back stronger than before", "Even if something doesn't fully heal, you can still move without pain, live life on your terms, and return to the activities you care about. Most people come back stronger and more capable than before injury."),
+    ])}
   </div>
 </section>
 
-<section class="section" aria-labelledby="why-works-h">
+<section class="section section--white" aria-labelledby="why-works-h">
   <div class="container">
-    <h2 id="why-works-h" class="center">Why this works when others haven't</h2>
+    <h2 id="why-works-h">Why this works when <em>others haven't.</em></h2>
     <div class="compare">
       <div class="compare__col compare__col--old">
         <h3>Most systems</h3>
@@ -483,7 +514,7 @@ def build_pain():
 <section class="section section--sage" aria-labelledby="bottom-h">
   <div class="container prose-wide center">
     <p class="eyebrow">Bottom line</p>
-    <h2 id="bottom-h" class="statement">You're not broken.</h2>
+    <h2 id="bottom-h" class="statement">You're <em>not</em> broken.</h2>
     <p class="lede">You just haven't had a system that understands your body, adapts in real time, and takes you all the way back to full function.</p>
     <p class="lede lede--strong">This one does. And we guarantee it.</p>
     {book_btn("Book Now")}
@@ -499,22 +530,22 @@ def build_perform():
     sports = ["Track and Field", "Volleyball", "Hockey", "NFL / CFL",
               "UFC / MMA / Jiu-Jitsu", "NLL", "Showjumping"]
     chips = "".join(f"<li>{e(s)}</li>" for s in sports)
-    body = hero(
+    body = page_head(
         "If you compete",
-        "I want to dominate<br>the competition",
+        "I want to dominate <em>the competition.</em>",
         "World and national record-producing strength and conditioning. Built for the athletes who'd rather earn the edge than wait for one.",
         book_btn("Book Now", "btn--light") +
-        '<a class="btn btn--ghost" href="#athletes">See who we train ↓</a>',
-        "hero--perform",
+        '<a class="text-link" href="#athletes">See who we train</a>',
+        "green",
     )
     body += f"""
 <section class="section" aria-labelledby="proof-h">
   <div class="container">
-    <header class="section-head section-head--center">
+    <header class="section-head">
       <p class="eyebrow">The proof is the record book</p>
-      <h2 id="proof-h">What sets the program apart</h2>
+      <h2 id="proof-h">What sets the program <em>apart.</em></h2>
     </header>
-    <div class="grid grid--4">
+    <div class="stats">
       <div class="stat"><p class="stat__num">Multiple</p><h3 class="stat__label">World &amp; national records</h3><p>A strength and conditioning team with a track record of producing record-holding athletes.</p></div>
       <div class="stat"><p class="stat__num">8+</p><h3 class="stat__label">Pro &amp; Olympic sports</h3><p>Athletes from the NFL, CFL, NLL, UFC, track and field, volleyball, hockey, showjumping, and more.</p></div>
       <div class="stat"><p class="stat__num">10-15%</p><h3 class="stat__label">Average improvement</h3><p>What most athletes see in their first 12 weeks training with Better Forever.</p></div>
@@ -527,43 +558,44 @@ def build_perform():
   <div class="container grid grid--2 grid--center">
     <figure class="photo photo--tall"><img src="/img/perform.jpg" width="900" height="1350" alt="A sprinter running on a track at sunset" loading="lazy" decoding="async"></figure>
     <div>
-    <header class="section-head">
       <p class="eyebrow">Athletes we train</p>
-      <h2 id="athletes-h">Olympic. Collegiate. Professional.</h2>
+      <h2 id="athletes-h">Olympic. Collegiate. <em>Professional.</em></h2>
       <p class="lede">We've worked with athletes across every level - from juniors chasing their first scholarship to pros chasing the next title.</p>
-    </header>
-    <ul class="chips">{chips}</ul>
+      <ul class="chips">{chips}</ul>
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="guar-h">
-  <div class="container">
-    <div class="panel panel--green panel--center">
-      <h2 id="guar-h">Performance guarantee</h2>
+<section class="section section--sage" aria-labelledby="guar-h">
+  <div class="container band">
+    <div>
+      <p class="eyebrow">Our promise</p>
+      <h2 id="guar-h">Performance <em>guarantee.</em></h2>
+    </div>
+    <div>
       <p class="lede">We back our work with a 1-month improvement guarantee. Most athletes see a 10-15% improvement in their first 12 weeks with Better Forever - measurable, repeatable, and built to stack on top of itself.</p>
-      {book_btn("Book a Performance Assessment", "btn--light")}
+      {book_btn("Book a Performance Assessment")}
     </div>
   </div>
 </section>
 
-<section class="section section--white" aria-labelledby="out-h">
+<section class="section" aria-labelledby="out-h">
   <div class="container">
     <header class="section-head">
       <p class="eyebrow">What you walk away with</p>
-      <h2 id="out-h">The outcomes our athletes chase - and hit</h2>
+      <h2 id="out-h">The outcomes our athletes chase - <em>and hit.</em></h2>
     </header>
-    <div class="grid grid--2">
-      <div class="card"><h3 class="card__title">Scholarships and professional careers</h3><p>Get noticed. Get drafted. Get paid to do what you love.</p></div>
-      <div class="card"><h3 class="card__title">More playing time. Make the team.</h3><p>Earn your spot on the competitive roster - and keep it.</p></div>
-      <div class="card"><h3 class="card__title">Break personal records and plateaus</h3><p>Move the numbers that have been stuck for years.</p></div>
-      <div class="card"><h3 class="card__title">Improve resiliency and reduce injury risk</h3><p>Stay on the field. Train harder. Recover faster.</p></div>
-      <div class="card card--wide"><h3 class="card__title">An unfair advantage over your competition</h3><p>The work nobody sees is what shows up on game day.</p></div>
-    </div>
+    {numbered([
+      ("Scholarships and professional careers", "Get noticed. Get drafted. Get paid to do what you love."),
+      ("More playing time. Make the team.", "Earn your spot on the competitive roster - and keep it."),
+      ("Break personal records and plateaus", "Move the numbers that have been stuck for years."),
+      ("Improve resiliency and reduce injury risk", "Stay on the field. Train harder. Recover faster."),
+      ("An unfair advantage over your competition", "The work nobody sees is what shows up on game day."),
+    ])}
   </div>
 </section>
 """
-    body += cta_band("Find your unfair advantage.",
+    body += cta_band("Find your <em>unfair</em> advantage.",
                      "Book a performance assessment and we'll show you exactly what's leaving points on the table - and how we close it.")
     return page("/perform/", "Athletic Performance Training in Langley, BC",
                 "World and national record-producing strength and conditioning for Olympic, collegiate, and professional athletes in Langley, BC.",
@@ -571,30 +603,29 @@ def build_perform():
 
 
 def build_young():
-    body = hero(
+    body = page_head(
         "If you want it for life",
-        "I want to be<br>young forever",
+        "I want to be <em>young forever.</em>",
         "Many of our clients are in the best shape of their lives in their 40s, 50s, 60s and beyond - even with no prior training or athletic background.",
-        book_btn("Book Now", "btn--light") +
-        '<a class="btn btn--ghost" href="#possible">See what\'s possible ↓</a>',
-        "hero--young",
+        book_btn("Book Now") + '<a class="text-link" href="#possible">See what\'s possible</a>',
+        "white",
     )
     body += f"""
-<section class="section section--white">
+<section class="section">
   <div class="container prose-wide">
-    <h2 class="statement">You're allowed to want more out of this decade.</h2>
+    <h2 class="statement">You're allowed to want <em>more</em> out of this decade.</h2>
     <p class="lede">Most people quietly accept the trade-offs of getting older. They stop trying things. They stop saying yes. They stop showing up the way they want to.</p>
     <p class="lede lede--strong">You don't have to.</p>
   </div>
 </section>
 
-<section class="section" id="possible" aria-labelledby="possible-h">
+<section class="section section--white" id="possible" aria-labelledby="possible-h">
   <div class="container">
-    <header class="section-head section-head--center"><h2 id="possible-h">What's possible</h2></header>
+    <header class="section-head"><p class="eyebrow">Imagine this</p><h2 id="possible-h">What's <em>possible.</em></h2></header>
     <div class="grid grid--3">
-      <div class="card"><h3 class="card__title">Do the things you love - for as long as you want to do them</h3>{check_list(["Skiing, golf, mountain biking, hockey", "Working in the yard, gardening", "Fishing, hiking, anything outdoors"])}</div>
-      <div class="card"><h3 class="card__title">Say yes to adventures</h3>{check_list(["Enjoy vacations again", "Say yes to adventures", "Stop worrying if your body will hold up"])}</div>
-      <div class="card"><h3 class="card__title">Stay sharp, confident, independent</h3>
+      <div><h3>Do the things you love - for as long as you want to do them</h3>{check_list(["Skiing, golf, mountain biking, hockey", "Working in the yard, gardening", "Fishing, hiking, anything outdoors"])}</div>
+      <div><h3>Say yes to adventures</h3>{check_list(["Enjoy vacations again", "Say yes to adventures", "Stop worrying if your body will hold up"])}</div>
+      <div><h3>Stay sharp, confident, independent</h3>
         <dl class="def">
           <dt>Stay mentally sharp</dt><dd>Confident, focused, present</dd>
           <dt>Stay confident in your body</dt><dd>In how it moves. In how it looks.</dd>
@@ -604,25 +635,25 @@ def build_young():
   </div>
 </section>
 
-<section class="section section--white" aria-labelledby="fam-h">
+<section class="section" aria-labelledby="fam-h">
   <div class="container grid grid--2 grid--split">
     <div>
       <p class="eyebrow">If this sounds familiar</p>
-      <h2 id="fam-h">Does any of this sound like you?</h2>
+      <h2 id="fam-h">Does any of this <em>sound like you?</em></h2>
       {check_list([
         "Is your body stiff and sore in ways it didn't used to be?",
         "Can't pick up your favourite activities without paying for it the next day?",
         "Is your body composition changing and you no longer like what you see in the mirror?",
         "Are you worried you'll become a burden to loved ones later in life?"])}
     </div>
-    <div class="panel panel--green">
-      <h2>It doesn't have to be this way.</h2>
+    <div class="panel panel--sage">
+      <h2>It doesn't have to be <em>this way.</em></h2>
       <p class="lede">Join our long list of success stories of people achieving the best shape of their lives in their 40s, 50s, 60s and beyond, even with no prior training experience. Experience a system that meets you where you are and takes you where you want to be.</p>
     </div>
   </div>
 </section>
 """
-    body += cta_band("Start saying yes to what life has to offer.",
+    body += cta_band("Start saying <em>yes</em> to what life has to offer.",
                      "Book a starting conversation. We'll show you what the next chapter actually looks like.")
     return page("/young-forever/", "Strength, Longevity and Healthy Aging in Langley, BC",
                 "Get in the best shape of your life in your 40s, 50s, 60s and beyond, with no prior training required. Better Forever, Langley, BC.",
@@ -634,10 +665,9 @@ def build_team():
     for m in TEAM:
         if m.get("photo"):
             avatar = (f'<div class="member__avatar member__avatar--photo"><span class="member__initials" aria-hidden="true">{m["initials"]}</span>'
-                      f'<img src="{m["photo"]}" width="160" height="160" alt="{e(m["name"])}" loading="lazy" decoding="async" data-fallback></div>')
+                      f'<img src="{m["photo"]}" width="176" height="224" alt="{e(m["name"])}" loading="lazy" decoding="async" data-fallback></div>')
         else:
             avatar = f'<div class="member__avatar" aria-hidden="true"><span class="member__initials">{m["initials"]}</span></div>'
-        paras = "".join(f"<p>{e(p)}</p>" for p in m["bio"])
         cards.append(f"""<article class="member" id="{m['key']}">
   {avatar}
   <div class="member__main">
@@ -651,19 +681,18 @@ def build_team():
     <a class="btn btn--primary btn--sm" href="/book/" data-jane="{m['key']}">{e(m['short'])}</a>
   </div>
 </article>""")
-    body = hero(
+    body = page_head(
         "Meet the team",
-        "The people behind<br>Better Forever",
+        "The people behind <em>Better Forever.</em>",
         "Decades of combined experience treating world-class athletes and everyday people who were told they had to live with it. They didn't. Neither do you.",
-        book_btn("Book a Session", "btn--light"),
-        "hero--short",
+        book_btn("Book a Session"),
     )
     body += f"""
 <section class="section">
   <div class="container team-list">{''.join(cards)}</div>
 </section>
 """
-    body += cta_band("Not sure who to start with?",
+    body += cta_band("Not sure who to <em>start</em> with?",
                      "That's exactly what our Book Now flow is for. We'll meet you where you are.",
                      "Start Your Journey")
     return page("/team/", "Meet the Team",
@@ -695,9 +724,9 @@ def inquiry_form(form_id, intro_pathway=False):
 
 
 def build_contact():
-    body = hero("Contact us", "We'd love to<br>hear from you",
-                "Visit the clinic, give us a call, or send a quick note. For booking, head to the Book Now page - this form is for general inquiries.",
-                book_btn("Book Now", "btn--light"), "hero--short")
+    body = page_head("Contact us", "We'd love to <em>hear from you.</em>",
+                     "Visit the clinic, give us a call, or send a quick note. For booking, head to the Book Now page - this form is for general inquiries.",
+                     book_btn("Book Now"))
     body += f"""
 <section class="section">
   <div class="container grid grid--2 grid--split">
@@ -707,7 +736,7 @@ def build_contact():
       <div class="info-card"><h2>Email us</h2><p><a href="mailto:{EMAIL}">{EMAIL}</a></p></div>
     </div>
     <div class="panel">
-      <h2>General inquiry</h2>
+      <h2>General <em>inquiry</em></h2>
       <p>Have a question that isn't about booking? Drop us a note here and we'll route it to the right person.</p>
       {inquiry_form("contact-form")}
     </div>
@@ -721,9 +750,9 @@ def build_contact():
 
 def build_book():
     people = "".join(f"""<li class="pick"><div class="pick__info"><h3>{e(m['name'])}</h3><p>{e(m['role'])}</p></div>
-        <a class="btn btn--primary btn--sm" href="#start" data-jane="{m['key']}">{e(m['short'])}</a></li>""" for m in TEAM)
-    body = hero("Book now", "Let's find your<br>starting point",
-                "Two ways in. Pick the one that fits where you are right now.", "", "hero--short")
+        <a class="btn btn--outline btn--sm" href="#start" data-jane="{m['key']}">{e(m['short'])}</a></li>""" for m in TEAM)
+    body = page_head("Book now", "Let's find your <em>starting point.</em>",
+                     "Two ways in. Pick the one that fits where you are right now.")
     body += f"""
 <section class="section" aria-labelledby="two-h">
   <div class="container">
@@ -731,13 +760,13 @@ def build_book():
     <div class="grid grid--2 grid--split">
       <div class="panel" id="practitioners">
         <p class="eyebrow">Option 1</p>
-        <h2>I know who I want to see</h2>
+        <h2>I know who I want <em>to see</em></h2>
         <p>Pick a practitioner and go straight to their booking page.</p>
         <ul class="picks">{people}</ul>
       </div>
       <div class="panel panel--green" id="start">
         <p class="eyebrow eyebrow--light">Option 2</p>
-        <h2>I'm just starting my journey</h2>
+        <h2>I'm just starting <em>my journey</em></h2>
         <p>Tell us about you. We'll route you to the right person and get back as soon as we can.</p>
         <div class="form-on-dark">{inquiry_form("book-form", intro_pathway=True)}</div>
       </div>
@@ -752,7 +781,7 @@ def build_book():
 
 def build_404():
     body = f"""<section class="section"><div class="container prose-wide center">
-  <p class="eyebrow">404</p><h1 class="statement">That page doesn't exist.</h1>
+  <p class="eyebrow">404</p><h1 class="statement">That page <em>doesn't exist.</em></h1>
   <p class="lede">Let's get you back on track.</p>
   <div class="btn-row btn-row--center">{book_btn("Book Now")}<a class="btn btn--outline" href="/">Home</a></div>
 </div></section>"""
