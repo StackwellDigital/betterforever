@@ -34,3 +34,12 @@
 .pk-note strong { color: #2d2a26; }
 @media (max-width: 900px) { .pk-grid { grid-template-columns: 1fr 1fr; } .pk-card, .pk-card:nth-child(1), .pk-card:nth-child(2) { grid-column: span 1; } .pk-card:last-child { grid-column: span 2; } .pk-note { grid-template-columns: 1fr; } }
 @media (max-width: 600px) { .pk-grid { grid-template-columns: 1fr; } .pk-card:last-child { grid-column: span 1; } }
+
+/* "Built by" credit in every footer */
+.site-footer__legal { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem 1.5rem; }
+.site-footer__credit a { font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
+.pk-credit { margin: 0; padding: 0 0 2.5rem; color: #5f574e; font-size: .9rem; }
+.pk-credit a { color: #005745; font-weight: 700; }
+/* keep the floating Book Now button and demo chip from covering the legal row at page end */
+.site-footer { padding-bottom: 5rem; }
+@media (max-width: 560px) { .site-footer { padding-bottom: 9rem; } }

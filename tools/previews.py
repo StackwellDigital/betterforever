@@ -20,7 +20,7 @@ threading.Thread(target=srv.serve_forever, daemon=True).start()
 with sync_playwright() as p:
     b = p.chromium.launch()
     pg = b.new_page(viewport={"width": 1440, "height": 900})
-    for key in ("classic", "editorial", "bold", "soft", "studio"):
+    for key in ("classic", "editorial", "bold", "soft", "noir"):
         pg.goto(f"http://127.0.0.1:{port}/{key}/")
         pg.evaluate("document.querySelectorAll('.picker-chip,.float-book').forEach(e=>e.remove())")
         pg.wait_for_timeout(700)

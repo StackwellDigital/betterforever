@@ -8,7 +8,7 @@ Run from the repo root:  python3 tools/build.py
   /editorial/     serif magazine remodel        (tools/editorial.py, css/editorial.css)
   /bold/          poster / neo-brutalist        (editorial markup +  css/bold.css)
   /soft/          calm rounded wellness         (editorial markup +  css/soft.css)
-  /studio/        sidebar + bento tiles         (editorial markup +  css/studio.css)
+  /noir/          black cinematic dark mode     (editorial markup +  css/noir.css)
 
 Shared assets (img, fonts, js) live at the site root. Once a style is chosen, delete the
 others and move the winner to the root (set PREFIX to "" in its module and drop picker.css).
@@ -39,9 +39,9 @@ STYLES = [
     dict(key="soft", mod=editorial, css=["/css/editorial.css", "/css/soft.css"], theme="theme-soft",
          name="Soft", blurb="Calm and welcoming. Centred layout, floating pill nav, big rounded cards, gentle shadows.",
          feel=["Calming", "Rounded", "Wellness"]),
-    dict(key="studio", mod=editorial, css=["/css/editorial.css", "/css/studio.css"], theme="theme-studio",
-         name="Studio", blurb="App-like. Fixed sidebar navigation with a bento grid of colour tiles.",
-         feel=["Modern", "Sidebar nav", "Tile layout"]),
+    dict(key="noir", mod=editorial, css=["/css/editorial.css", "/css/noir.css"], theme="theme-noir",
+         name="Noir", blurb="Black and cinematic. A full-bleed photo hero, glowing brand-green accents and glass cards.",
+         feel=["Dark mode", "Cinematic", "Premium"]),
 ]
 
 
@@ -84,6 +84,7 @@ def build_picker():
     <p><strong>What stays the same:</strong> brand colours, copy, team, booking flow and contact details. Only layout, typography and visual treatment change.</p>
     <p><strong>What happens next:</strong> once you choose, the other four get removed and the winner moves to the main address. Easy to tweak further after that.</p>
   </div>
+  <p class="pk-credit">Built by <a href="https://stackwell.digital" target="_blank" rel="noopener">stackwell.digital</a></p>
 </div>
 </body>
 </html>
@@ -98,8 +99,8 @@ def clean_old():
         shutil.rmtree(OUT / d, ignore_errors=True)
     for f in ("404.html", "sitemap.xml"):
         (OUT / f).unlink(missing_ok=True)
-    for s in STYLES:
-        shutil.rmtree(OUT / s["key"], ignore_errors=True)
+    for key in [s["key"] for s in STYLES] + ["studio"]:
+        shutil.rmtree(OUT / key, ignore_errors=True)
 
 
 def build_404():

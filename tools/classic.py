@@ -231,7 +231,7 @@ def footer():
       </address>
     </div>
   </div>
-  <div class="container site-footer__legal"><p>&copy; <span id="year">2026</span> {NAME}. All rights reserved.</p></div>
+  <div class="container site-footer__legal"><p>&copy; <span id="year">2026</span> {NAME}. All rights reserved.</p><p class="site-footer__credit">Built by <a href="https://stackwell.digital" target="_blank" rel="noopener">stackwell.digital</a></p></div>
 </footer>"""
 
 

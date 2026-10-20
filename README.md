@@ -1,6 +1,6 @@
 # Style picker (current demo state)
 
-`/` is a style picker. Five complete copies of the site live in `/classic/`, `/editorial/`, `/bold/`, `/soft/` and `/studio/`.
+`/` is a style picker. Five complete copies of the site live in `/classic/`, `/editorial/`, `/bold/`, `/soft/` and `/noir/`.
 Shared assets (`img/`, `fonts/`, `js/`) stay at the site root. Each style is a CSS file in `site/css/`; Bold, Soft and Studio load on top of `editorial.css`.
 
 ```
