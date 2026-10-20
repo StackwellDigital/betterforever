@@ -202,3 +202,7 @@ h1 em, h2 em, h3 em, .hero-home__title em { font-style: normal; font-weight: 500
   .hero-home { background: linear-gradient(180deg, rgba(9, 11, 10, .6), rgba(9, 11, 10, .95) 75%), radial-gradient(40rem 24rem at 20% 100%, var(--glow), transparent 70%), url("/img/hero.jpg") 70% top / cover no-repeat, var(--bg); }
   .stat + .stat { border-left: 0; }
 }
+
+@media (max-width: 560px) {
+  .strip__inner { font-size: 1rem; }
+}

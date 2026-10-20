@@ -164,3 +164,8 @@ h1 em, h2 em, h3 em, .hero-home__title em { font-style: normal; font-weight: 800
   .site-nav__cta { margin: 1.25rem 0 0; }
   .brand__name { font-size: 1.1rem; }
 }
+
+@media (max-width: 560px) {
+  .carousel__btn { box-shadow: 2px 2px 0 var(--ink); }
+  .carousel { overflow-x: clip; padding-right: 4px; }
+}
