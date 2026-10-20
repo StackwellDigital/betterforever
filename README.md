@@ -1,17 +1,6 @@
-# Style picker (current demo state)
-
-`/` is a style picker. Five complete copies of the site live in `/classic/`, `/editorial/`, `/bold/`, `/soft/` and `/noir/`.
-Shared assets (`img/`, `fonts/`, `js/`) stay at the site root. Each style is a CSS file in `site/css/`; Bold, Soft and Studio load on top of `editorial.css`.
-
-```
-python3 tools/build.py      # builds the picker + all five styles
-python3 tools/previews.py   # regenerates the picker thumbnails (needs playwright)
-```
-
-Once a style is chosen: delete the other style folders and `css/picker.css`, set that module's `PREFIX` to `""`, and drop the "All styles" chip from `finalize()`.
-The sections below describe the original single-style layout and still apply to `tools/classic.py` / `tools/editorial.py` (page copy lives in those files).
-
 # Better Forever website
+
+The chosen design is the original ("Classic") style, now at the site root. The other four demo styles and the picker were removed; they are preserved in git under the tag `picker-demo-5-styles`.
 
 Static rebuild of the Better Forever (Langley, BC) site. Plain HTML, CSS and a little vanilla JS. No framework, no build step on the host. Brand colours, fonts, copy and contact details come from the client's existing preview site.
 
@@ -25,7 +14,7 @@ site/            <- deploy this folder (CF Pages "build output directory")
   js/main.js              nav, carousel, Jane link wiring, forms
   img/ fonts/             logo, self-hosted Montserrat + Open Sans (variable woff2)
   _headers                security headers + caching (Cloudflare Pages format)
-tools/build.py   <- generates every HTML page; all copy and the shared header/footer live here
+tools/build.py   <- generates every page. Page copy, header and footer live in tools/classic.py; styles in site/css/classic.css
 ```
 
 Pages are generated, so **edit `tools/build.py` and re-run it, not the HTML**:

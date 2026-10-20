@@ -14,7 +14,7 @@ OUT = ROOT / "site"
 
 # ---------------------------------------------------------------- settings
 SITE_URL = "https://betterforever.ca"   # used for canonical + sitemap only
-PREFIX = ""                              # set by tools/build.py, e.g. "/classic"
+PREFIX = ""                              # site root
 CSS = []                                 # stylesheet hrefs for this style
 THEME = ""                               # body class for this style
 DEMO = True                              # True = noindex everywhere. Flip to False at launch.
@@ -239,12 +239,11 @@ import re
 
 
 def finalize(doc):
-    """Prefix internal page links with this style's folder; add the back-to-picker chip."""
+    """Prefix internal page links with PREFIX (empty at the site root)."""
     def fix(m):
         return f'{m.group(1)}="{PREFIX}/{m.group(2)}"'
     doc = re.sub(r'(href|action)="/(?!/)(?!(?:css|img|js|fonts)/)([^"]*)"', fix, doc)
-    chip = '<a class="picker-chip" href="/">&larr; All styles</a>\n'
-    return doc.replace("</body>", chip + "</body>")
+    return doc
 
 
 def page(path, title, desc, body, current="", schema=False, body_class=""):
@@ -273,7 +272,7 @@ def page(path, title, desc, body, current="", schema=False, body_class=""):
 <link rel="apple-touch-icon" href="/img/logo.png">
 <link rel="preload" href="/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/open-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-{"".join(f'<link rel="stylesheet" href="{c}">\n' for c in CSS)}<link rel="stylesheet" href="/css/picker.css">
+{"".join(f'<link rel="stylesheet" href="{c}">\n' for c in CSS)}
 
 {ld}
 </head>
