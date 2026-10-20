@@ -1,6 +1,6 @@
 # Better Forever website
 
-The chosen design is the original ("Classic") style, now at the site root. The other four demo styles and the picker were removed; they are preserved in git under the tag `picker-demo-5-styles`.
+The chosen design is the original ("Classic") style, now at the site root. The other four demo styles and the picker were removed; they are preserved in git history at commit `8bc98b5` (run `git checkout 8bc98b5` to see them).
 
 Static rebuild of the Better Forever (Langley, BC) site. Plain HTML, CSS and a little vanilla JS. No framework, no build step on the host. Brand colours, fonts, copy and contact details come from the client's existing preview site.
 
