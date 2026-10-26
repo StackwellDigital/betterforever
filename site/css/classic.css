@@ -144,8 +144,8 @@ ul { margin: 0; padding: 0; }
 .hero {
   position: relative; color: #fff; isolation: isolate;
   background:
-    linear-gradient(180deg, rgba(0, 69, 54, .45) 0%, rgba(0, 69, 54, .68) 100%),
-    var(--hero-img) center / cover no-repeat,
+    linear-gradient(180deg, rgba(0, 69, 54, .86) 0%, rgba(0, 69, 54, .78) 45%, rgba(0, 69, 54, .5) 75%, rgba(0, 69, 54, .66) 100%),
+    var(--hero-img) 50% 100% / cover no-repeat,
     var(--color-primary);
   padding-block: clamp(3.5rem, 9vw, 7rem);
 }
@@ -368,6 +368,9 @@ ul { margin: 0; padding: 0; }
 .photo--banner { grid-column: 1 / -1; margin-top: var(--space-md, 1.5rem); }
 .photo--banner img { aspect-ratio: 21 / 8; object-fit: cover; object-position: 50% 58%; }
 @media (max-width: 860px) { .photo--banner img { aspect-ratio: 4 / 3; } }
+.photo--floor img { object-position: 50% 62%; }
+.photo--db img { object-position: 50% 40%; }
+.photo--wide img { aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 30%; }
 
 @media (max-width: 560px) {
   .text-link, .link-arrow { display: inline-flex; align-items: center; min-height: 44px; }

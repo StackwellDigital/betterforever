@@ -362,6 +362,7 @@ def build_home():
         <span class="card__more">Perform at my best {ARROW}</span>
       </a>
     </div>
+    <figure class="photo photo--banner photo--floor"><img src="/img/gym-floor.jpg" width="1280" height="960" alt="The Better Forever training floor, with squat racks, dumbbells and the painted logo wall" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 
@@ -537,12 +538,13 @@ def build_perform():
       <div class="stat"><p class="stat__num">10-15%</p><h3 class="stat__label">Average improvement</h3><p>What most athletes see in their first 12 weeks training with Better Forever.</p></div>
       <div class="stat"><p class="stat__num">1 Month</p><h3 class="stat__label">Improvement guarantee</h3><p>We back our work with a measurable guarantee. If we don't deliver, you don't pay.</p></div>
     </div>
+    <figure class="photo photo--banner photo--db"><img src="/img/gym-dumbbells.jpg" width="1000" height="1013" alt="Rows of heavy dumbbells on red racks in front of the Better Forever logo wall" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 
 <section class="section section--white" id="athletes" aria-labelledby="athletes-h">
   <div class="container grid grid--2 grid--center">
-    <figure class="photo photo--tall"><img src="/img/perform.jpg" width="900" height="1350" alt="A sprinter running on a track at sunset" loading="lazy" decoding="async"></figure>
+    <figure class="photo photo--tall"><img src="/img/gym-rack.jpg" width="780" height="1040" alt="A power rack and loaded barbell on the Better Forever training floor" loading="lazy" decoding="async"></figure>
     <div>
     <header class="section-head">
       <p class="eyebrow">Athletes we train</p>
@@ -722,6 +724,7 @@ def build_contact():
       <div class="info-card"><h2>Visit us</h2><p><a href="{MAPS_URL}" rel="noopener">{e(ADDR_STREET)}, {ADDR_CITY} {ADDR_REGION} {ADDR_POSTAL}</a></p></div>
       <div class="info-card"><h2>Call us</h2><p><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p></div>
       <div class="info-card"><h2>Email us</h2><p><a href="mailto:{EMAIL}">{EMAIL}</a></p></div>
+      <figure class="photo photo--wide"><img src="/img/gym-logo-rack.jpg" width="1000" height="833" alt="Dumbbell racks beneath the Better Forever logo at the clinic" loading="lazy" decoding="async"></figure>
     </div>
     <div class="panel">
       <h2>General inquiry</h2>
