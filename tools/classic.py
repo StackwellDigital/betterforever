@@ -337,6 +337,8 @@ def build_home():
         '<a class="btn btn--ghost" href="/book/" data-jane="general">Book Now</a>',
         "hero--home hero--tall",
     )
+    body += """<div class="hero-photo"><img src="/img/hero.jpg" width="1440" height="891" alt="The Better Forever logo painted on the brick wall above rows of dumbbells and kettlebells" fetchpriority="high" decoding="async"></div>
+"""
     body += f"""
 <section class="section" id="pathways" aria-labelledby="pathways-h">
   <div class="container">
