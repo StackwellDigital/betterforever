@@ -144,8 +144,9 @@ ul { margin: 0; padding: 0; }
 .hero {
   position: relative; color: #fff; isolation: isolate;
   background:
-    linear-gradient(180deg, rgba(0, 69, 54, .55) 0%, rgba(0, 69, 54, .75) 100%),
-    var(--hero-img) 50% 62% / cover no-repeat,
+    radial-gradient(ellipse 55% 60% at 50% 50%, rgba(0, 69, 54, .62) 0%, rgba(0, 69, 54, 0) 100%),
+    linear-gradient(180deg, rgba(0, 69, 54, .42) 0%, rgba(0, 69, 54, .5) 100%),
+    var(--hero-img) 50% 12% / cover no-repeat,
     var(--color-primary);
   padding-block: clamp(3.5rem, 9vw, 7rem);
 }
@@ -359,10 +360,11 @@ ul { margin: 0; padding: 0; }
   .btn:hover, .card--link:hover { transform: none; }
 }
 
-/* Home: headline on a solid green band, full uncropped photo underneath */
-.hero--home { background: linear-gradient(180deg, var(--color-primary-dark, #004536) 0%, var(--color-primary, #005745) 100%); padding-bottom: clamp(2.5rem, 6vw, 4.5rem); }
-.hero-photo { background: var(--color-primary, #005745); line-height: 0; }
-.hero-photo img { display: block; width: 100%; height: auto; }
+@media (max-width: 700px) { .hero { background-position: 0 0, 0 0, 8% 12%, 0 0; } }
+
+/* Home: hero height follows the photo's shape so the logo wall and the weights both stay in frame */
+.hero--home { min-height: min(62vw, 92vh); display: flex; align-items: center; background-position: 0 0, 0 0, 50% 40%, 0 0; }
+@media (max-width: 700px) { .hero--home { min-height: 0; background-position: 0 0, 0 0, 8% 30%, 0 0; } }
 
 /* ---------- photos ---------- */
 .photo { margin: 0; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); background: var(--color-sage, #cfe6bf); }
