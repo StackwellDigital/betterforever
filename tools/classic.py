@@ -343,7 +343,7 @@ def build_home():
     <header class="section-head section-head--center">
       <p class="eyebrow">Three pathways, one promise</p>
       <h2 id="pathways-h">Where do you want to go?</h2>
-      <p class="lede">Better Forever's approach is built around you. Whether you're sidelined with pain, just making the first step in your physical journey, or a high-level athlete at the top of your game - your ceiling is higher with Better Forever, and we guarantee it.</p>
+      <p class="lede">Better Forever's approach is built around you. Whether you're sidelined with pain, just making the first step in your physical journey, or a high-level athlete at the top of your game - your ceiling is higher with Better Forever, and it's risk free.</p>
     </header>
     <div class="grid grid--3">
       <a class="card card--link" href="/pain/">
@@ -409,9 +409,9 @@ def build_pain():
         "hero--pain",
     )
     body += f"""
-<section class="section section--tight" aria-label="Our guarantees">
+<section class="section section--tight" aria-label="Our risk free promise">
   <div class="container grid grid--3">
-    <div class="stat-card"><h2 class="stat-card__h">1-Month Improvement Guarantee</h2><p>You get better or you get your money back. Simple as that.</p></div>
+    <div class="stat-card"><h2 class="stat-card__h">1-Month Risk Free Improvement</h2><p>You get better or you get your money back. Simple as that.</p></div>
     <div class="stat-card"><h2 class="stat-card__h">First Session Risk Free</h2><p>Billed after you leave the building. You only pay if you found it valuable.</p></div>
     <div class="stat-card"><h2 class="stat-card__h">95%+ Success Rate</h2><p>Including with cases that have failed elsewhere - multiple times.</p></div>
   </div>
@@ -503,13 +503,13 @@ def build_pain():
     <p class="eyebrow">Bottom line</p>
     <h2 id="bottom-h" class="statement">You're not broken.</h2>
     <p class="lede">You just haven't had a system that understands your body, adapts in real time, and takes you all the way back to full function.</p>
-    <p class="lede lede--strong">This one does. And we guarantee it.</p>
+    <p class="lede lede--strong">This one does. And it's risk free.</p>
     {book_btn("Book Now")}
   </div>
 </section>
 """
     return page("/pain/", "Get Out of Pain in Langley, BC",
-                "Pain stopping you from doing what you love? Better Forever in Langley, BC finds the real cause and fixes the whole system, backed by a 1-month improvement guarantee.",
+                "Pain stopping you from doing what you love? Better Forever in Langley, BC finds the real cause and fixes the whole system, with a risk free 1-month improvement offer.",
                 body, "/pain/")
 
 
@@ -536,7 +536,7 @@ def build_perform():
       <div class="stat"><p class="stat__num">Multiple</p><h3 class="stat__label">World &amp; national records</h3><p>A strength and conditioning team with a track record of producing record-holding athletes.</p></div>
       <div class="stat"><p class="stat__num">8+</p><h3 class="stat__label">Pro &amp; Olympic sports</h3><p>Athletes from the NFL, CFL, NLL, UFC, track and field, volleyball, hockey, showjumping, and more.</p></div>
       <div class="stat"><p class="stat__num">10-15%</p><h3 class="stat__label">Average improvement</h3><p>What most athletes see in their first 12 weeks training with Better Forever.</p></div>
-      <div class="stat"><p class="stat__num">1 Month</p><h3 class="stat__label">Improvement guarantee</h3><p>We back our work with a measurable guarantee. If we don't deliver, you don't pay.</p></div>
+      <div class="stat"><p class="stat__num">1 Month</p><h3 class="stat__label">Risk free improvement</h3><p>We back our work with a measurable, risk free offer. If we don't deliver, you don't pay.</p></div>
     </div>
     <figure class="photo photo--banner photo--db"><img src="/img/gym-dumbbells.jpg" width="1000" height="1013" alt="Rows of heavy dumbbells on red racks in front of the Better Forever logo wall" loading="lazy" decoding="async"></figure>
   </div>
@@ -559,8 +559,8 @@ def build_perform():
 <section class="section" aria-labelledby="guar-h">
   <div class="container">
     <div class="panel panel--green panel--center">
-      <h2 id="guar-h">Performance guarantee</h2>
-      <p class="lede">We back our work with a 1-month improvement guarantee. Most athletes see a 10-15% improvement in their first 12 weeks with Better Forever - measurable, repeatable, and built to stack on top of itself.</p>
+      <h2 id="guar-h">Risk free performance</h2>
+      <p class="lede">We back our work with a risk free 1-month improvement offer. Most athletes see a 10-15% improvement in their first 12 weeks with Better Forever - measurable, repeatable, and built to stack on top of itself.</p>
       {book_btn("Book a Performance Assessment", "btn--light")}
     </div>
   </div>

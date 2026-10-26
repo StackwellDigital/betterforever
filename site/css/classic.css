@@ -278,7 +278,7 @@ ul { margin: 0; padding: 0; }
 
 /* ---------- booking & contact ---------- */
 .picks { list-style: none; display: grid; gap: .75rem; margin-top: 1.25rem; }
-.pick { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 1rem 1.25rem; border-radius: var(--radius-lg); background: var(--color-off-white); border: 1px solid rgba(203, 195, 187, .6); }
+.pick { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; padding: 1rem 1.25rem; border-radius: var(--radius-lg); background: var(--color-off-white); border: 1px solid rgba(203, 195, 187, .6); }
 .pick h3 { font-size: 1.0625rem; margin: 0; text-transform: none; }
 .pick p { margin: 0; font-size: var(--fs-small); color: #5a5148; }
 .contact-cards { display: grid; gap: 1rem; }
