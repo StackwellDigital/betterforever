@@ -364,7 +364,17 @@ ul { margin: 0; padding: 0; }
 
 /* Home: hero height follows the photo's shape so the logo wall and the weights both stay in frame */
 .hero--home { min-height: min(62vw, 92vh); display: flex; align-items: center; background-position: 0 0, 0 0, 50% 40%, 0 0; }
-@media (max-width: 700px) { .hero--home { min-height: 0; background-position: 0 0, 0 0, 8% 30%, 0 0; } }
+@media (max-width: 700px) {
+  /* Phone: whole photo at full width pinned to the bottom, top edge fades into the green, headline sits above it */
+  .hero--home {
+    min-height: 0; padding-bottom: calc(56vw + 1rem);
+    background:
+      linear-gradient(180deg, var(--color-primary-dark) 0%, rgba(0, 69, 54, 0) 32%) 0 100% / 100% 62vw no-repeat,
+      linear-gradient(180deg, rgba(0, 69, 54, .18), rgba(0, 69, 54, .18)) 0 100% / 100% 62vw no-repeat,
+      var(--hero-img) 0 100% / 100% auto no-repeat,
+      var(--color-primary-dark);
+  }
+}
 
 /* ---------- photos ---------- */
 .photo { margin: 0; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); background: var(--color-sage, #cfe6bf); }
