@@ -101,7 +101,7 @@ TEAM = [
 ]
 
 STORIES = [
-    ("JM", "Jonathan Meads", [
+    ("JM", "Jonathan M.", [
         "“I was told it couldn't be fixed.”",
         "Inoperable nerve root compression. Drop foot.",
         "Couldn't stand, walk, or sit without pain.",
@@ -109,7 +109,7 @@ STORIES = [
         "Today? Skis. Runs. Jumps. Rows.",
         "Pain free for over a year.",
     ], "Same diagnosis. Different approach."),
-    ("TW", "Tony Wiens", [
+    ("TW", "Tony W.", [
         "Lost 2/3 of his hand.",
         "Couldn't lift his arm halfway.",
         "L5-S1 disc extrusion.",
@@ -117,28 +117,28 @@ STORIES = [
         "Tony broke 3 national bench press records at 63.",
         "Now in the best shape of his life.",
     ], "Not perfect structure - just the right system."),
-    ("TD", "Trevor DeJong", [
+    ("TD", "Trevor D.", [
         "Daily pain.",
         "Had to quit running, golf, and work on his farm.",
         "Multiple physio rounds → worse symptoms. Recommended surgery.",
         "Today? Back to work. Running. Golfing.",
         "Pain free. No surgery.",
     ], ""),
-    ("BW", "Ben West", [
+    ("BW", "Ben W.", [
         "Achilles + bursal tear.",
         "Couldn't run. Couldn't play with his kids.",
         "Tried injections. Tried physio. No progress.",
         "8 weeks later → back running.",
         "Now doing the Grouse Grind multiple times a week and returning to soccer.",
     ], ""),
-    ("GB", "Gerry Bellerive", [
+    ("GB", "Gerry B.", [
         "Double knee replacement.",
         "Still in pain 1+ year later.",
         "Couldn't ski, bike, or play hockey. Had never squatted pain free in his life.",
         "Day 1: first pain-free squat.",
         "Weeks later → back to everything.",
     ], ""),
-    ("JL", "Joe LaLeggia", [
+    ("JL", "Joe L.", [
         "Total knee replacement.",
         "Still in pain a year later.",
         "Hockey and golf didn't feel the same. Thought it was permanent.",
@@ -414,7 +414,7 @@ def build_pain():
   <div class="container grid grid--3">
     <div class="stat-card"><h2 class="stat-card__h">1-Month Risk Free Improvement</h2><p>You get better or you get your money back. Simple as that.</p></div>
     <div class="stat-card"><h2 class="stat-card__h">First Session Risk Free</h2><p>Billed after you leave the building. You only pay if you found it valuable.</p></div>
-    <div class="stat-card"><h2 class="stat-card__h">95%+ Success Rate</h2><p>Including with cases that have failed elsewhere - multiple times.</p></div>
+    <div class="stat-card"><h2 class="stat-card__h">Over 90% Success Rate</h2><p>Including with cases that have failed elsewhere - multiple times.</p></div>
   </div>
 </section>
 
