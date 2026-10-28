@@ -284,6 +284,7 @@ def page(path, title, desc, body, current="", schema=False, body_class=""):
 {footer()}
 <script src="/js/config.js" defer></script>
 <script src="/js/main.js" defer></script>
+<script src="/js/analytics.js" defer></script>
 </body>
 </html>
 """
