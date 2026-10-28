@@ -41,7 +41,7 @@ Or direct upload with no git: `npx wrangler pages deploy site --project-name bet
    - `joel-and-clients.avif` (hero background; without it the hero is a plain green gradient)
    - `joel.avif` (Joel's portrait on /team; without it his card shows initials like the others)
 2. **Jane App.** Open `site/js/config.js` and paste the clinic's Jane URL into `jane.general`, plus per-practitioner URLs if they have them. Until then every Book Now button lands on the on-site `/book/` page so nothing is a dead link.
-3. **Inquiry forms.** Set `inquiryEndpoint` in `config.js` (Formspree, a Pages Function, etc). Until then the forms open the visitor's email app addressed to admin@betterforever.ca.
+3. **Inquiry forms.** `inquiryEndpoint` is `/api/inquiry` (Pages Function in `functions/api/inquiry.js`, sends via Resend from forms@betterforever.ca to info@betterforever.ca). Needs the `RESEND_API_KEY` secret (send only key) in Pages env vars. No key set means the form shows the error message with the phone and email fallback.
 4. **Go live.** In `tools/build.py` set `DEMO = False` and re-run it. While `DEMO = True` every page has `noindex` and `robots.txt` blocks all crawlers, so the demo cannot get indexed. Going live also writes `sitemap.xml` using `SITE_URL`.
 5. **Hours** were "to be confirmed" on the client's preview, so they are left off. Add them (and `openingHoursSpecification` in the JSON-LD) once known.
 6. The preview's footer social icons pointed at `#`. They are omitted here; add real links when the client has them.

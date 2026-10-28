@@ -25,6 +25,6 @@ window.BF_CONFIG = {
       marina: ""
     }
   },
-  inquiryEndpoint: "",
-  inquiryEmail: "admin@betterforever.ca"
+  inquiryEndpoint: "/api/inquiry",
+  inquiryEmail: "info@betterforever.ca"
 };
