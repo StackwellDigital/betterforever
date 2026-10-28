@@ -32,7 +32,7 @@ if __name__ == "__main__":
     urls = classic.build_all("", ["/css/classic.css"], "theme-classic")
     build_404()
     (OUT / "robots.txt").write_text(
-        "User-agent: *\nDisallow: /\n" if DEMO else f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n",
+        "User-agent: *\nDisallow: /\n" if DEMO else f"User-agent: *\nDisallow: /joel/\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n",
         encoding="utf-8")
     if DEMO:
         (OUT / "sitemap.xml").unlink(missing_ok=True)

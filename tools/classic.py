@@ -246,11 +246,11 @@ def finalize(doc):
     return doc
 
 
-def page(path, title, desc, body, current="", schema=False, body_class=""):
+def page(path, title, desc, body, current="", schema=False, body_class="", hidden=False):
     """Render a full HTML page to site/<path>/index.html (or site/<path> if .html)."""
     full_title = f"{title} | {NAME}" if title else f"{NAME} - {TAGLINE}"
     canonical = SITE_URL + PREFIX + (path if path.endswith("/") else "/" + path.lstrip("/"))
-    robots = '<meta name="robots" content="noindex, nofollow">\n' if DEMO else ""
+    robots = '<meta name="robots" content="noindex, nofollow">\n' if (DEMO or hidden) else ""
     ld = jsonld_clinic() if schema else ""
     doc = f"""<!doctype html>
 <html lang="en-CA">
@@ -771,8 +771,109 @@ def build_book():
                 body, "/book/")
 
 
+def build_joel():
+    """Hidden review page for Joel. Not in nav, footer, sitemap or robots allow list. Always noindex."""
+    m = next(t for t in TEAM if t["key"] == "joel")
+    body = hero(
+        "Head Trainer",
+        "Train with<br>Joel McCain",
+        "Fifteen years coaching strength athletes, and the creator of the CORE4 system. Schedule your sessions with Joel directly.",
+        book_btn("Schedule with Joel", "btn--light", "joel") +
+        '<a class="btn btn--ghost" href="#about">About Joel &darr;</a>',
+        "hero--short",
+    )
+    body += f"""
+<section class="section section--tight" aria-label="Draft notice">
+  <div class="container">
+    <div class="draft-note">
+      <p class="eyebrow">Draft for Joel</p>
+      <p>This page is not public and not linked anywhere on the site. It is here so you can tell us what to keep, cut and change. Questions are at the bottom.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about" aria-labelledby="about-h">
+  <div class="container joel-intro">
+    <div class="joel-intro__photo">
+      <span class="member__initials" aria-hidden="true">{m['initials']}</span>
+      <img src="{m['photo']}" width="480" height="560" alt="{e(m['name'])}" loading="lazy" decoding="async" data-fallback>
+    </div>
+    <div>
+      <header class="section-head">
+        <p class="eyebrow">About Joel</p>
+        <h2 id="about-h">Strength coach. Record holder. Builder of CORE4.</h2>
+      </header>
+      {"".join(f"<p>{e(p)}</p>" for p in m['bio'])}
+    </div>
+  </div>
+</section>
+
+<section class="section section--white" aria-labelledby="core4-h">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">The system</p>
+      <h2 id="core4-h">CORE4 and CORE4+</h2>
+      <p class="lede">Joel built CORE4 with the Better Forever team after his own long road through the medical system. It is made for people dealing with injuries and chronic pain who want to move without it.</p>
+    </header>
+    <div class="grid grid--2">
+      <div class="card"><h3 class="card__title">CORE4</h3><p>Placeholder. Joel, tell us in your own words what CORE4 is and who it is for.</p></div>
+      <div class="card"><h3 class="card__title">CORE4+</h3><p>Placeholder. What is different about CORE4+, and who moves up to it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="who-h">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">Who Joel coaches</p>
+      <h2 id="who-h">From first sessions to record attempts</h2>
+    </header>
+    {check_list([
+        "Four world record holding strength athletes",
+        "National and provincial record holders",
+        "Collegiate, professional and Olympic athletes across more than 15 sports",
+        "People with injuries and chronic pain who were told to live with it",
+    ])}
+  </div>
+</section>
+
+<section class="section section--white" aria-labelledby="sched-h">
+  <div class="container">
+    <div class="panel panel--green panel--center">
+      <h2 id="sched-h">Schedule with Joel</h2>
+      <p class="lede">Pick a time that works. This booking page is schedule only, so there is nothing to fill out first.</p>
+      {book_btn("Schedule with Joel", "btn--light", "joel")}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="qs-h">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">For Joel</p>
+      <h2 id="qs-h">Tell us what you want this to be</h2>
+    </header>
+    <div class="grid grid--2">
+      <div class="card"><h3 class="card__title">Look and feel</h3><p>Keep it matched to the clinic, or give your own work a different feel? Send any pages or sites you like.</p></div>
+      <div class="card"><h3 class="card__title">Photos</h3><p>We need a clear portrait of you and one or two shots of you coaching. Real photos only.</p></div>
+      <div class="card"><h3 class="card__title">What to say</h3><p>Which of the sections above stay, which go, and what is missing. CORE4 and CORE4+ copy needs to come from you.</p></div>
+      <div class="card"><h3 class="card__title">Booking</h3><p>Your outside clients move into the clinic system by Nov 1. Tell us which session types should be bookable from this page.</p></div>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn--primary" href="mailto:{EMAIL}?subject=Joel%20page%20feedback">Send feedback</a>
+    </div>
+  </div>
+</section>
+"""
+    return page("/joel/", "Train with Joel McCain",
+                "Schedule with Joel McCain, head trainer and creator of CORE4 at Better Forever in Langley, BC.",
+                body, "", hidden=True)
+
+
 def build_all(prefix, css, theme):
     global PREFIX, CSS, THEME
     PREFIX, CSS, THEME = prefix, css, theme
-    return [build_home(), build_pain(), build_perform(), build_young(),
+    urls = [build_home(), build_pain(), build_perform(), build_young(),
             build_team(), build_contact(), build_book()]
+    build_joel()  # hidden: deliberately not in the returned list, so never in the sitemap
+    return urls

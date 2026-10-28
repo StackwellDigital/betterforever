@@ -399,3 +399,12 @@ ul { margin: 0; padding: 0; }
 .site-footer__credit a { font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
 .site-footer { padding-bottom: 5rem; }
 @media (max-width: 560px) { .site-footer { padding-bottom: 9rem; } }
+
+/* hidden Joel review page */
+.draft-note { background: var(--color-secondary); border-radius: var(--radius-xl); padding: clamp(1rem, 3vw, 1.5rem) clamp(1.25rem, 3vw, 2rem); }
+.draft-note p:last-child { margin-bottom: 0; }
+.joel-intro { display: grid; grid-template-columns: minmax(0, 320px) 1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+.joel-intro__photo { position: relative; aspect-ratio: 6 / 7; background: var(--color-primary); color: #fff; border-radius: var(--radius-xl); display: grid; place-items: center; overflow: hidden; box-shadow: var(--shadow-md); }
+.joel-intro__photo .member__initials { font-size: 4rem; }
+.joel-intro__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 760px) { .joel-intro { grid-template-columns: 1fr; } .joel-intro__photo { max-width: 280px; } }
