@@ -13,7 +13,7 @@ import classic
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "site"
 DEMO = False
-SITE_URL = "https://betterforever.ca"
+SITE_URL = "https://www.betterforever.ca"
 
 
 def build_404():

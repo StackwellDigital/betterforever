@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "site"
 
 # ---------------------------------------------------------------- settings
-SITE_URL = "https://betterforever.ca"   # used for canonical + sitemap only
+SITE_URL = "https://www.betterforever.ca"   # used for canonical + sitemap only
 PREFIX = ""                              # site root
 CSS = []                                 # stylesheet hrefs for this style
 THEME = ""                               # body class for this style
