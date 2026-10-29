@@ -38,7 +38,7 @@ e = html.escape
 # ---------------------------------------------------------------- team data
 TEAM = [
     {
-        "key": "berghamer", "initials": "JB",
+        "key": "berghamer", "initials": "JB", "photo": "/img/berghamer.jpg",
         "name": "Dr. Jonathon Berghamer",
         "role": "Naturopathic Doctor - Co-Founder of Better Forever",
         "short": "Book with Dr. Berghamer",
