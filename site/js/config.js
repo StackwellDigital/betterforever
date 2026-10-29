@@ -22,7 +22,7 @@ window.BF_CONFIG = {
       kawamoto: "https://betterforeverclinic.janeapp.com/#/staff_member/4",
       joel: "",
       cam: "https://betterforeverclinic.janeapp.com/#/staff_member/6",
-      marina: ""
+      marina: "https://betterforeverclinic.janeapp.com/#/staff_member/5"
     }
   },
   inquiryEndpoint: "/api/inquiry",
