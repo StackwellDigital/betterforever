@@ -12,7 +12,7 @@ import classic
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "site"
-DEMO = True
+DEMO = False
 SITE_URL = "https://betterforever.ca"
 
 
