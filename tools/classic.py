@@ -881,7 +881,7 @@ def legal_page(path, title, desc, intro, sections):
     body += f"""
 <section class="section" aria-label="{e(title)}">
   <div class="container legal">
-    <p class="legal__date">Effective date: {todo("confirm at launch")}. Last updated: October 28, 2026.</p>
+    <p class="legal__date">Effective date: November 1, 2026. Last updated: October 28, 2026.</p>
     {intro}
     {secs}
   </div>
