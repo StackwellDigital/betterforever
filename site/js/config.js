@@ -16,10 +16,10 @@
  */
 window.BF_CONFIG = {
   jane: {
-    general: "",
+    general: "https://betterforeverclinic.janeapp.com/",
     practitioners: {
-      berghamer: "",
-      kawamoto: "",
+      berghamer: "https://betterforeverclinic.janeapp.com/#/staff_member/7",
+      kawamoto: "https://betterforeverclinic.janeapp.com/#/staff_member/4",
       joel: "",
       cam: "",
       marina: ""
