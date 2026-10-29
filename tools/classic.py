@@ -932,7 +932,6 @@ def build_terms():
     S.append(("Booking and appointments", f"""<p>Appointments are booked through Jane App and are subject to the center's policies, including a 24 hour cancellation policy. Jane App has its own terms and privacy policy.</p>"""))
     S.append(("The Better Forever plan and the Risk Free offer", f"""<p>The Risk Free offer applies to the Better Forever plan only. It does not apply to ancillary services such as RMT, chiropractic and kinesiology, which support the training programs.</p>
 <p>Improvement is measured through a personal training program, using the baseline of the Core 4 assessment.</p>
-<p>Offer terms: {todo("to be provided by the center: the time frame, the refund process and any conditions")}.</p>
 <p>Stories and descriptions on this site are not a promise of any particular result. Results differ from person to person.</p>"""))
     S.append(("Our content", """<p>The text, photos, logos and design on this website belong to Better Forever or its licensors. You may view and share pages for personal, non commercial use. Please ask us before reusing anything else.</p>"""))
     S.append(("Links to other sites", """<p>This website links to services we do not control, such as Jane App and Google Maps. We are not responsible for their content or practices.</p>"""))
