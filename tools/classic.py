@@ -881,10 +881,6 @@ def legal_page(path, title, desc, intro, sections):
     body += f"""
 <section class="section" aria-label="{e(title)}">
   <div class="container legal">
-    <div class="draft-note">
-      <p class="eyebrow">Draft for review</p>
-      <p>This page is a draft for the center to review. Highlighted items in brackets need to be confirmed or filled in before launch.</p>
-    </div>
     <p class="legal__date">Effective date: {todo("confirm at launch")}. Last updated: October 28, 2026.</p>
     {intro}
     {secs}
@@ -920,7 +916,7 @@ def build_privacy():
 <p>Because of this, your information may be stored or processed outside Canada, where privacy laws may differ and authorities may be able to access it.</p>"""))
     S.append(("Your consent and choices", """<p>By sending the contact form you agree that we may use what you submit to respond to you. You can withdraw your consent at any time by contacting us, subject to legal or contractual limits.</p>
 <p>You can block or delete cookies in your browser settings, or install Google's analytics opt out browser add on, and the site will still work.</p>"""))
-    S.append(("How long we keep it", f"""<p>Contact form messages are kept for 6 months and then deleted. Analytics data is kept according to our Google Analytics settings, {todo("retention setting, to be confirmed")}.</p>"""))
+    S.append(("How long we keep it", f"""<p>Contact form messages are kept for 6 months and then deleted. Website analytics event data is kept for 2 months and user data for 14 months.</p>"""))
     S.append(("Access, correction and complaints", f"""<p>You can ask to see the personal information we hold about you, or ask us to correct it, by contacting our privacy contact above. We will respond within the time required by law.</p>
 <p>If you are not satisfied with our response, you can contact the Office of the Information and Privacy Commissioner for British Columbia at <a href="https://www.oipc.bc.ca" rel="noopener">oipc.bc.ca</a>.</p>"""))
     S.append(("Changes to this policy", """<p>We may update this policy from time to time. The date at the top shows when it was last changed.</p>"""))
@@ -933,7 +929,7 @@ def build_terms():
     S = []
     S.append(("About this website", """<p>The information on this website is general and for education only. It is not medical advice, and it does not diagnose or treat any condition. Reading the site or sending a message does not create a patient relationship with the center or any of its practitioners.</p>
 <p>If you think you have a medical emergency, call 911.</p>"""))
-    S.append(("Booking and appointments", f"""<p>Appointments are booked through Jane App and are subject to the center's policies, including {todo("24 hour cancellation policy, to be confirmed by Eilah")}. Jane App has its own terms and privacy policy.</p>"""))
+    S.append(("Booking and appointments", f"""<p>Appointments are booked through Jane App and are subject to the center's policies, including a 24 hour cancellation policy. Jane App has its own terms and privacy policy.</p>"""))
     S.append(("The Better Forever plan and the Risk Free offer", f"""<p>The Risk Free offer applies to the Better Forever plan only. It does not apply to ancillary services such as RMT, chiropractic and kinesiology, which support the training programs.</p>
 <p>Improvement is measured through a personal training program, using the baseline of the Core 4 assessment.</p>
 <p>Offer terms: {todo("to be provided by the center: the time frame, the refund process and any conditions")}.</p>
