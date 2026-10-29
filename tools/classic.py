@@ -268,8 +268,12 @@ def page(path, title, desc, body, current="", schema=False, body_class="", hidde
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{SITE_URL}/img/logo.png">
 <meta name="twitter:card" content="summary">
-<link rel="icon" type="image/png" href="/img/logo.png">
-<link rel="apple-touch-icon" href="/img/logo.png">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="BetterForever">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/open-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 {"".join(f'<link rel="stylesheet" href="{c}">\n' for c in CSS)}
