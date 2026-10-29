@@ -23,12 +23,12 @@ TAGLINE = "Find Your Better"
 PHONE_DISPLAY = "778-766-5083"
 PHONE_TEL = "+17787665083"
 EMAIL = "info@betterforever.ca"
-ADDR_STREET = "#101 - 20086 92A Street"
+ADDR_STREET = "#101 - 20086 92A Avenue"
 ADDR_CITY = "Langley"
 ADDR_REGION = "BC"
 ADDR_POSTAL = "V1M 3A4"
 MAPS_URL = "https://www.google.com/maps/search/?api=1&query=" + \
-    "%23101+-+20086+92A+Street%2C+Langley+BC+V1M+3A4"
+    "%23101+-+20086+92A+Avenue%2C+Langley+BC+V1M+3A4"
 DESCRIPTION = ("Better Forever is a functional health, performance, and pain "
                "resolution center in Langley, BC. Find your better.")
 
