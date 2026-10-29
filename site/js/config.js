@@ -21,7 +21,7 @@ window.BF_CONFIG = {
       berghamer: "https://betterforeverclinic.janeapp.com/#/staff_member/7",
       kawamoto: "https://betterforeverclinic.janeapp.com/#/staff_member/4",
       joel: "",
-      cam: "",
+      cam: "https://betterforeverclinic.janeapp.com/#/staff_member/6",
       marina: ""
     }
   },
