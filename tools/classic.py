@@ -883,7 +883,7 @@ def legal_page(path, title, desc, intro, sections):
   <div class="container legal">
     <div class="draft-note">
       <p class="eyebrow">Draft for review</p>
-      <p>This page is a draft for the clinic to review. Highlighted items in brackets need to be confirmed or filled in before launch.</p>
+      <p>This page is a draft for the center to review. Highlighted items in brackets need to be confirmed or filled in before launch.</p>
     </div>
     <p class="legal__date">Effective date: {todo("confirm at launch")}. Last updated: October 28, 2026.</p>
     {intro}
@@ -896,13 +896,13 @@ def legal_page(path, title, desc, intro, sections):
 
 def build_privacy():
     S = []
-    S.append(("Who we are", f"""<p>{NAME} operates this website and the clinic at {e(ADDR_STREET)}, {ADDR_CITY} {ADDR_REGION} {ADDR_POSTAL}. This policy explains what personal information this website collects, why, and what your choices are.</p>
-<p>Privacy contact: {todo("name and title, to be confirmed by the clinic")}. Email <a href="mailto:{EMAIL}">{EMAIL}</a> or call <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>.</p>"""))
+    S.append(("Who we are", f"""<p>{NAME} operates this website and the center at {e(ADDR_STREET)}, {ADDR_CITY} {ADDR_REGION} {ADDR_POSTAL}. This policy explains what personal information this website collects, why, and what your choices are.</p>
+<p>Privacy contact: Eilah B. Email <a href="mailto:{EMAIL}">{EMAIL}</a> or call <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>.</p>"""))
     S.append(("What we collect on this website", """<ul>
 <li><strong>Contact form.</strong> Your name, email address, the message you write, and your optional choice of what brings you in.</li>
 <li><strong>Website analytics.</strong> On betterforever.ca we use Google Analytics 4. It records pages viewed, device and browser type, approximate location (city level), how you arrived, and whether you tap the booking, phone or email links. It uses cookies.</li>
 <li><strong>Technical data.</strong> Our hosting provider, Cloudflare, processes your IP address and request details to deliver and protect the site.</li>
-<li><strong>Online booking.</strong> The Book Now buttons take you to Jane App, our booking and patient records software. What you enter there is handled under the clinic's practices and Jane's own privacy policy, not this website.</li>
+<li><strong>Online booking.</strong> The Book Now buttons take you to Jane App, our booking and patient records software. What you enter there is handled under the center's practices and Jane's own privacy policy, not this website.</li>
 </ul>"""))
     S.append(("Health information", """<p>Please do not send medical details, symptoms or diagnoses through the contact form or by regular email. For anything about your care, call us or book an appointment.</p>"""))
     S.append(("How we use it", """<ul>
@@ -920,7 +920,7 @@ def build_privacy():
 <p>Because of this, your information may be stored or processed outside Canada, where privacy laws may differ and authorities may be able to access it.</p>"""))
     S.append(("Your consent and choices", """<p>By sending the contact form you agree that we may use what you submit to respond to you. You can withdraw your consent at any time by contacting us, subject to legal or contractual limits.</p>
 <p>You can block or delete cookies in your browser settings, or install Google's analytics opt out browser add on, and the site will still work.</p>"""))
-    S.append(("How long we keep it", f"""<p>Contact form messages are kept for {todo("retention period, to be confirmed by the clinic")} and then deleted. Analytics data is kept according to our Google Analytics settings, {todo("retention setting, to be confirmed")}.</p>"""))
+    S.append(("How long we keep it", f"""<p>Contact form messages are kept for 6 months and then deleted. Analytics data is kept according to our Google Analytics settings, {todo("retention setting, to be confirmed")}.</p>"""))
     S.append(("Access, correction and complaints", f"""<p>You can ask to see the personal information we hold about you, or ask us to correct it, by contacting our privacy contact above. We will respond within the time required by law.</p>
 <p>If you are not satisfied with our response, you can contact the Office of the Information and Privacy Commissioner for British Columbia at <a href="https://www.oipc.bc.ca" rel="noopener">oipc.bc.ca</a>.</p>"""))
     S.append(("Changes to this policy", """<p>We may update this policy from time to time. The date at the top shows when it was last changed.</p>"""))
@@ -931,15 +931,16 @@ def build_privacy():
 
 def build_terms():
     S = []
-    S.append(("About this website", """<p>The information on this website is general and for education only. It is not medical advice, and it does not diagnose or treat any condition. Reading the site or sending a message does not create a patient relationship with the clinic or any of its practitioners.</p>
+    S.append(("About this website", """<p>The information on this website is general and for education only. It is not medical advice, and it does not diagnose or treat any condition. Reading the site or sending a message does not create a patient relationship with the center or any of its practitioners.</p>
 <p>If you think you have a medical emergency, call 911.</p>"""))
-    S.append(("Booking and appointments", f"""<p>Appointments are booked through Jane App and are subject to the clinic's policies, including {todo("cancellation and late policy, to be provided by the clinic")}. Jane App has its own terms and privacy policy.</p>"""))
-    S.append(("The Better Forever plan and the Risk Free offer", f"""<p>The Risk Free offer applies to the Better Forever plan only. It does not apply to clinical care provided by registered health practitioners.</p>
-<p>Offer terms: {todo("to be provided by the clinic: what counts as improvement, how it is measured, the time frame, the refund process and any conditions")}.</p>
+    S.append(("Booking and appointments", f"""<p>Appointments are booked through Jane App and are subject to the center's policies, including {todo("24 hour cancellation policy, to be confirmed by Eilah")}. Jane App has its own terms and privacy policy.</p>"""))
+    S.append(("The Better Forever plan and the Risk Free offer", f"""<p>The Risk Free offer applies to the Better Forever plan only. It does not apply to ancillary services such as RMT, chiropractic and kinesiology, which support the training programs.</p>
+<p>Improvement is measured through a personal training program, using the baseline of the Core 4 assessment.</p>
+<p>Offer terms: {todo("to be provided by the center: the time frame, the refund process and any conditions")}.</p>
 <p>Stories and descriptions on this site are not a promise of any particular result. Results differ from person to person.</p>"""))
     S.append(("Our content", """<p>The text, photos, logos and design on this website belong to Better Forever or its licensors. You may view and share pages for personal, non commercial use. Please ask us before reusing anything else.</p>"""))
     S.append(("Links to other sites", """<p>This website links to services we do not control, such as Jane App and Google Maps. We are not responsible for their content or practices.</p>"""))
-    S.append(("Limits of liability", """<p>This website is provided as is. To the extent the law allows, Better Forever is not responsible for losses that result from using this website or relying on its content. This does not limit any responsibility a practitioner has for the clinical care they provide.</p>"""))
+    S.append(("Limits of liability", """<p>This website is provided as is. To the extent the law allows, Better Forever is not responsible for losses that result from using this website or relying on its content. This does not limit any responsibility a practitioner has for the services they provide.</p>"""))
     S.append(("Governing law", """<p>These terms are governed by the laws of British Columbia and the federal laws of Canada that apply there. Any dispute will be handled by the courts of British Columbia.</p>"""))
     S.append(("Changes and contact", f"""<p>We may update these terms from time to time. Questions? Email <a href="mailto:{EMAIL}">{EMAIL}</a> or call <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>.</p>"""))
     return legal_page("/terms/", "Terms of Use",
