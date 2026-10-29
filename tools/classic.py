@@ -30,7 +30,7 @@ ADDR_POSTAL = "V1M 3A4"
 MAPS_URL = "https://www.google.com/maps/search/?api=1&query=" + \
     "%23101+-+20086+92A+Street%2C+Langley+BC+V1M+3A4"
 DESCRIPTION = ("Better Forever is a functional health, performance, and pain "
-               "resolution clinic in Langley, BC. Find your better.")
+               "resolution center in Langley, BC. Find your better.")
 
 e = html.escape
 
@@ -717,7 +717,7 @@ def inquiry_form(form_id, intro_pathway=False):
 
 def build_contact():
     body = hero("Contact us", "We'd love to<br>hear from you",
-                "Visit the clinic, give us a call, or send a quick note. For booking, head to the Book Now page - this form is for general inquiries.",
+                "Visit the center, give us a call, or send a quick note. For booking, head to the Book Now page - this form is for general inquiries.",
                 book_btn("Book Now", "btn--light"), "hero--short")
     body += f"""
 <section class="section">
@@ -726,7 +726,7 @@ def build_contact():
       <div class="info-card"><h2>Visit us</h2><p><a href="{MAPS_URL}" rel="noopener">{e(ADDR_STREET)}, {ADDR_CITY} {ADDR_REGION} {ADDR_POSTAL}</a></p></div>
       <div class="info-card"><h2>Call us</h2><p><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p></div>
       <div class="info-card"><h2>Email us</h2><p><a href="mailto:{EMAIL}">{EMAIL}</a></p></div>
-      <figure class="photo photo--wide"><img src="/img/gym-logo-rack.jpg" width="1000" height="833" alt="Dumbbell racks beneath the Better Forever logo at the clinic" loading="lazy" decoding="async"></figure>
+      <figure class="photo photo--wide"><img src="/img/gym-logo-rack.jpg" width="1000" height="833" alt="Dumbbell racks beneath the Better Forever logo at the center" loading="lazy" decoding="async"></figure>
     </div>
     <div class="panel">
       <h2>General inquiry</h2>
@@ -855,10 +855,10 @@ def build_joel():
       <h2 id="qs-h">Tell us what you want this to be</h2>
     </header>
     <div class="grid grid--2">
-      <div class="card"><h3 class="card__title">Look and feel</h3><p>Keep it matched to the clinic, or give your own work a different feel? Send any pages or sites you like.</p></div>
+      <div class="card"><h3 class="card__title">Look and feel</h3><p>Keep it matched to the center, or give your own work a different feel? Send any pages or sites you like.</p></div>
       <div class="card"><h3 class="card__title">Photos</h3><p>We need a clear portrait of you and one or two shots of you coaching. Real photos only.</p></div>
       <div class="card"><h3 class="card__title">What to say</h3><p>Which of the sections above stay, which go, and what is missing. CORE4 and CORE4+ copy needs to come from you.</p></div>
-      <div class="card"><h3 class="card__title">Booking</h3><p>Your outside clients move into the clinic system by Nov 1. Tell us which session types should be bookable from this page.</p></div>
+      <div class="card"><h3 class="card__title">Booking</h3><p>Your outside clients move into the center system by Nov 1. Tell us which session types should be bookable from this page.</p></div>
     </div>
     <div class="btn-row">
       <a class="btn btn--primary" href="mailto:{EMAIL}?subject=Joel%20page%20feedback">Send feedback</a>
