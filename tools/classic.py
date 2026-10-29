@@ -30,7 +30,7 @@ ADDR_POSTAL = "V1M 3A4"
 MAPS_URL = "https://www.google.com/maps/search/?api=1&query=" + \
     "%23101+-+20086+92A+Street%2C+Langley+BC+V1M+3A4"
 DESCRIPTION = ("Better Forever is a functional health, performance, and pain "
-               "resolution clinic in Langley, BC. Find your better.")
+               "resolution center in Langley, BC. Find your better.")
 
 e = html.escape
 
@@ -231,7 +231,7 @@ def footer():
       </address>
     </div>
   </div>
-  <div class="container site-footer__legal"><p>&copy; <span id="year">2026</span> {NAME}. All rights reserved.</p><p class="site-footer__credit">Built by <a href="https://stackwell.digital" target="_blank" rel="noopener">stackwell.digital</a></p></div>
+  <div class="container site-footer__legal"><p>&copy; <span id="year">2026</span> {NAME}. All rights reserved.</p><p class="site-footer__links"><a href="/privacy/">Privacy Policy</a> <a href="/terms/">Terms of Use</a></p><p class="site-footer__credit">Built by <a href="https://stackwell.digital" target="_blank" rel="noopener">stackwell.digital</a></p></div>
 </footer>"""
 
 
@@ -709,6 +709,7 @@ def inquiry_form(form_id, intro_pathway=False):
       <div class="field"><label for="{form_id}-email">Email</label><input id="{form_id}-email" name="email" type="email" autocomplete="email" required></div>
       {pathway}
       <div class="field"><label for="{form_id}-msg">Message</label><textarea id="{form_id}-msg" name="message" rows="5" required></textarea></div>
+      <p class="form__note">Please do not include medical details in this form. See our <a href="/privacy/">Privacy Policy</a>.</p>
       <p class="form__status" role="status" aria-live="polite"></p>
       <button class="btn btn--primary" type="submit">Send Message</button>
     </form>"""
@@ -716,7 +717,7 @@ def inquiry_form(form_id, intro_pathway=False):
 
 def build_contact():
     body = hero("Contact us", "We'd love to<br>hear from you",
-                "Visit the clinic, give us a call, or send a quick note. For booking, head to the Book Now page - this form is for general inquiries.",
+                "Visit the center, give us a call, or send a quick note. For booking, head to the Book Now page - this form is for general inquiries.",
                 book_btn("Book Now", "btn--light"), "hero--short")
     body += f"""
 <section class="section">
@@ -725,7 +726,7 @@ def build_contact():
       <div class="info-card"><h2>Visit us</h2><p><a href="{MAPS_URL}" rel="noopener">{e(ADDR_STREET)}, {ADDR_CITY} {ADDR_REGION} {ADDR_POSTAL}</a></p></div>
       <div class="info-card"><h2>Call us</h2><p><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p></div>
       <div class="info-card"><h2>Email us</h2><p><a href="mailto:{EMAIL}">{EMAIL}</a></p></div>
-      <figure class="photo photo--wide"><img src="/img/gym-logo-rack.jpg" width="1000" height="833" alt="Dumbbell racks beneath the Better Forever logo at the clinic" loading="lazy" decoding="async"></figure>
+      <figure class="photo photo--wide"><img src="/img/gym-logo-rack.jpg" width="1000" height="833" alt="Dumbbell racks beneath the Better Forever logo at the center" loading="lazy" decoding="async"></figure>
     </div>
     <div class="panel">
       <h2>General inquiry</h2>
@@ -854,10 +855,10 @@ def build_joel():
       <h2 id="qs-h">Tell us what you want this to be</h2>
     </header>
     <div class="grid grid--2">
-      <div class="card"><h3 class="card__title">Look and feel</h3><p>Keep it matched to the clinic, or give your own work a different feel? Send any pages or sites you like.</p></div>
+      <div class="card"><h3 class="card__title">Look and feel</h3><p>Keep it matched to the center, or give your own work a different feel? Send any pages or sites you like.</p></div>
       <div class="card"><h3 class="card__title">Photos</h3><p>We need a clear portrait of you and one or two shots of you coaching. Real photos only.</p></div>
       <div class="card"><h3 class="card__title">What to say</h3><p>Which of the sections above stay, which go, and what is missing. CORE4 and CORE4+ copy needs to come from you.</p></div>
-      <div class="card"><h3 class="card__title">Booking</h3><p>Your outside clients move into the clinic system by Nov 1. Tell us which session types should be bookable from this page.</p></div>
+      <div class="card"><h3 class="card__title">Booking</h3><p>Your outside clients move into the center system by Nov 1. Tell us which session types should be bookable from this page.</p></div>
     </div>
     <div class="btn-row">
       <a class="btn btn--primary" href="mailto:{EMAIL}?subject=Joel%20page%20feedback">Send feedback</a>
@@ -870,10 +871,88 @@ def build_joel():
                 body, "", hidden=True)
 
 
+def todo(text):
+    return f'<mark class="todo">[{e(text)}]</mark>'
+
+
+def legal_page(path, title, desc, intro, sections):
+    body = hero("Legal", title.replace(" ", "<br>", 1), desc, "", "hero--short")
+    secs = "".join(f"<h2>{e(h)}</h2>{b}" for h, b in sections)
+    body += f"""
+<section class="section" aria-label="{e(title)}">
+  <div class="container legal">
+    <div class="draft-note">
+      <p class="eyebrow">Draft for review</p>
+      <p>This page is a draft for the center to review. Highlighted items in brackets need to be confirmed or filled in before launch.</p>
+    </div>
+    <p class="legal__date">Effective date: {todo("confirm at launch")}. Last updated: October 28, 2026.</p>
+    {intro}
+    {secs}
+  </div>
+</section>
+"""
+    return page(path, title, desc, body, "")
+
+
+def build_privacy():
+    S = []
+    S.append(("Who we are", f"""<p>{NAME} operates this website and the center at {e(ADDR_STREET)}, {ADDR_CITY} {ADDR_REGION} {ADDR_POSTAL}. This policy explains what personal information this website collects, why, and what your choices are.</p>
+<p>Privacy contact: Eilah B. Email <a href="mailto:{EMAIL}">{EMAIL}</a> or call <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>.</p>"""))
+    S.append(("What we collect on this website", """<ul>
+<li><strong>Contact form.</strong> Your name, email address, the message you write, and your optional choice of what brings you in.</li>
+<li><strong>Website analytics.</strong> On betterforever.ca we use Google Analytics 4. It records pages viewed, device and browser type, approximate location (city level), how you arrived, and whether you tap the booking, phone or email links. It uses cookies.</li>
+<li><strong>Technical data.</strong> Our hosting provider, Cloudflare, processes your IP address and request details to deliver and protect the site.</li>
+<li><strong>Online booking.</strong> The Book Now buttons take you to Jane App, our booking and patient records software. What you enter there is handled under the center's practices and Jane's own privacy policy, not this website.</li>
+</ul>"""))
+    S.append(("Health information", """<p>Please do not send medical details, symptoms or diagnoses through the contact form or by regular email. For anything about your care, call us or book an appointment.</p>"""))
+    S.append(("How we use it", """<ul>
+<li>To reply to your message.</li>
+<li>To understand how the site is used and to improve it.</li>
+<li>To keep the site secure.</li>
+</ul>
+<p>We do not sell your personal information and we do not use it for advertising.</p>"""))
+    S.append(("Who handles it for us", """<ul>
+<li><strong>Resend</strong> delivers contact form messages to our inbox. Its servers are in the United States.</li>
+<li><strong>Google</strong> provides website analytics. Data is processed in the United States and other countries.</li>
+<li><strong>Cloudflare</strong> hosts and protects this website.</li>
+<li><strong>Jane App</strong> provides online booking, as described above.</li>
+</ul>
+<p>Because of this, your information may be stored or processed outside Canada, where privacy laws may differ and authorities may be able to access it.</p>"""))
+    S.append(("Your consent and choices", """<p>By sending the contact form you agree that we may use what you submit to respond to you. You can withdraw your consent at any time by contacting us, subject to legal or contractual limits.</p>
+<p>You can block or delete cookies in your browser settings, or install Google's analytics opt out browser add on, and the site will still work.</p>"""))
+    S.append(("How long we keep it", f"""<p>Contact form messages are kept for 6 months and then deleted. Analytics data is kept according to our Google Analytics settings, {todo("retention setting, to be confirmed")}.</p>"""))
+    S.append(("Access, correction and complaints", f"""<p>You can ask to see the personal information we hold about you, or ask us to correct it, by contacting our privacy contact above. We will respond within the time required by law.</p>
+<p>If you are not satisfied with our response, you can contact the Office of the Information and Privacy Commissioner for British Columbia at <a href="https://www.oipc.bc.ca" rel="noopener">oipc.bc.ca</a>.</p>"""))
+    S.append(("Changes to this policy", """<p>We may update this policy from time to time. The date at the top shows when it was last changed.</p>"""))
+    return legal_page("/privacy/", "Privacy Policy",
+                      "How Better Forever collects, uses and protects personal information on this website.",
+                      "", S)
+
+
+def build_terms():
+    S = []
+    S.append(("About this website", """<p>The information on this website is general and for education only. It is not medical advice, and it does not diagnose or treat any condition. Reading the site or sending a message does not create a patient relationship with the center or any of its practitioners.</p>
+<p>If you think you have a medical emergency, call 911.</p>"""))
+    S.append(("Booking and appointments", f"""<p>Appointments are booked through Jane App and are subject to the center's policies, including {todo("24 hour cancellation policy, to be confirmed by Eilah")}. Jane App has its own terms and privacy policy.</p>"""))
+    S.append(("The Better Forever plan and the Risk Free offer", f"""<p>The Risk Free offer applies to the Better Forever plan only. It does not apply to ancillary services such as RMT, chiropractic and kinesiology, which support the training programs.</p>
+<p>Improvement is measured through a personal training program, using the baseline of the Core 4 assessment.</p>
+<p>Offer terms: {todo("to be provided by the center: the time frame, the refund process and any conditions")}.</p>
+<p>Stories and descriptions on this site are not a promise of any particular result. Results differ from person to person.</p>"""))
+    S.append(("Our content", """<p>The text, photos, logos and design on this website belong to Better Forever or its licensors. You may view and share pages for personal, non commercial use. Please ask us before reusing anything else.</p>"""))
+    S.append(("Links to other sites", """<p>This website links to services we do not control, such as Jane App and Google Maps. We are not responsible for their content or practices.</p>"""))
+    S.append(("Limits of liability", """<p>This website is provided as is. To the extent the law allows, Better Forever is not responsible for losses that result from using this website or relying on its content. This does not limit any responsibility a practitioner has for the services they provide.</p>"""))
+    S.append(("Governing law", """<p>These terms are governed by the laws of British Columbia and the federal laws of Canada that apply there. Any dispute will be handled by the courts of British Columbia.</p>"""))
+    S.append(("Changes and contact", f"""<p>We may update these terms from time to time. Questions? Email <a href="mailto:{EMAIL}">{EMAIL}</a> or call <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>.</p>"""))
+    return legal_page("/terms/", "Terms of Use",
+                      "The terms for using the Better Forever website, booking, and the Risk Free offer.",
+                      "", S)
+
+
 def build_all(prefix, css, theme):
     global PREFIX, CSS, THEME
     PREFIX, CSS, THEME = prefix, css, theme
     urls = [build_home(), build_pain(), build_perform(), build_young(),
-            build_team(), build_contact(), build_book()]
+            build_team(), build_contact(), build_book(),
+            build_privacy(), build_terms()]
     build_joel()  # hidden: deliberately not in the returned list, so never in the sitemap
     return urls
