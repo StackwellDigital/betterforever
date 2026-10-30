@@ -66,6 +66,7 @@ TEAM = [
     },
     {
         "key": "joel", "initials": "JM", "photo": "/img/joel.avif",
+        "bookable": False,  # not taking new clients: no booking button on /team/ or /book/. /joel/ (hidden) keeps its link for existing clients
         "name": "Joel McCain",
         "role": "Head Trainer - Creator of CORE4 & CORE4+",
         "short": "Book with Joel",
@@ -658,6 +659,8 @@ def build_team():
         else:
             avatar = f'<div class="member__avatar" aria-hidden="true"><span class="member__initials">{m["initials"]}</span></div>'
         paras = "".join(f"<p>{e(p)}</p>" for p in m["bio"])
+        book_link = (f'<a class="btn btn--primary btn--sm" href="/book/" data-jane="{m["key"]}">{e(m["short"])}</a>'
+                     if m.get("bookable", True) else "")
         cards.append(f"""<article class="member" id="{m['key']}">
   {avatar}
   <div class="member__main">
@@ -668,7 +671,7 @@ def build_team():
       <summary><span class="when-closed">Read more</span><span class="when-open">Show less</span></summary>
       <div class="member__bio">{''.join(f'<p>{e(p)}</p>' for p in m['bio'][1:])}</div>
     </details>
-    <a class="btn btn--primary btn--sm" href="/book/" data-jane="{m['key']}">{e(m['short'])}</a>
+    {book_link}
   </div>
 </article>""")
     body = hero(
@@ -743,7 +746,7 @@ def build_contact():
 
 def build_book():
     people = "".join(f"""<li class="pick"><div class="pick__info"><h3>{e(m['name'])}</h3><p>{e(m['role'])}</p></div>
-        <a class="btn btn--primary btn--sm" href="#start" data-jane="{m['key']}">{e(m['short'])}</a></li>""" for m in TEAM)
+        <a class="btn btn--primary btn--sm" href="#start" data-jane="{m['key']}">{e(m['short'])}</a></li>""" for m in TEAM if m.get("bookable", True))
     body = hero("Book now", "Let's find your<br>starting point",
                 "Two ways in. Pick the one that fits where you are right now.", "", "hero--short")
     body += f"""
