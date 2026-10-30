@@ -210,7 +210,7 @@ def header(current):
 
 def footer():
     all_links = "".join(f'<li><a href="{h}">{e(l)}</a></li>' for h, l in
-                        [("/", "Home")] + NAV + NAV_RIGHT + [("/book/", "Book Now")])
+                        [("/", "Home")] + NAV + NAV_RIGHT + [("/faq/", "FAQ"), ("/book/", "Book Now")])
     return f"""<footer class="site-footer">
   <div class="container site-footer__grid">
     <div>
@@ -246,12 +246,12 @@ def finalize(doc):
     return doc
 
 
-def page(path, title, desc, body, current="", schema=False, body_class="", hidden=False):
+def page(path, title, desc, body, current="", schema=False, body_class="", hidden=False, extra_ld=""):
     """Render a full HTML page to site/<path>/index.html (or site/<path> if .html)."""
     full_title = f"{title} | {NAME}" if title else f"{NAME} - {TAGLINE}"
     canonical = SITE_URL + PREFIX + (path if path.endswith("/") else "/" + path.lstrip("/"))
     robots = '<meta name="robots" content="noindex, nofollow">\n' if (DEMO or hidden) else ""
-    ld = jsonld_clinic() if schema else ""
+    ld = (jsonld_clinic() if schema else "") + extra_ld
     doc = f"""<!doctype html>
 <html lang="en-CA">
 <head>
@@ -943,11 +943,76 @@ def build_terms():
                       "", S)
 
 
+# ---------------------------------------------------------------- FAQ
+HOURS = [
+    ("Monday", "9:30 am to 5 pm"),
+    ("Tuesday", "12 pm to 6 pm"),
+    ("Wednesday", "9:30 am to 5 pm"),
+    ("Thursday", "9 am to 4 pm"),
+    ("Friday", "Flex day for practitioners"),
+]
+
+
+def build_faq():
+    hours_html = "<ul>" + "".join(f"<li><strong>{d}:</strong> {t}</li>" for d, t in HOURS) + "</ul>"
+    # (question, html answer, plain text answer for FAQPage schema)
+    QA = [
+        ("What is Better Forever?",
+         "<p>Better Forever is a training and care center in Langley, BC. We offer private and semi private personal training built around the Core 4 assessment, along with care from our practitioners, all under the same roof.</p>",
+         "Better Forever is a training and care center in Langley, BC. We offer private and semi private personal training built around the Core 4 assessment, along with care from our practitioners, all under the same roof."),
+        ("Where are you located?",
+         f'<p>We are at <a href="{MAPS_URL}" rel="noopener">{e(ADDR_STREET)}, {ADDR_CITY}, {ADDR_REGION} {ADDR_POSTAL}</a>.</p>',
+         f"We are at {ADDR_STREET}, {ADDR_CITY}, {ADDR_REGION} {ADDR_POSTAL}."),
+        ("What are your hours?",
+         f"<p>Gym access is available 24/7. Practitioner and coach hours are:</p>{hours_html}",
+         "Gym access is available 24/7. Practitioner and coach hours are: " + "; ".join(f"{d} {t}" for d, t in HOURS) + "."),
+        ("How do I book?",
+         f'<p>Book online on our <a href="/book/" data-jane="general">Book Now page</a>, call us at <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>, or email <a href="mailto:{EMAIL}">{EMAIL}</a>. If you are not sure who to book with, call or email and we will point you in the right direction.</p>',
+         f"Book online on our Book Now page, call us at {PHONE_DISPLAY}, or email {EMAIL}. If you are not sure who to book with, call or email and we will point you in the right direction."),
+        ("Do I need a referral, and do you direct bill insurance?",
+         "<p>No referral is needed. We can direct bill insurance.</p>",
+         "No referral is needed. We can direct bill insurance."),
+        ("What is the Core 4 assessment?",
+         "<p>The Core 4 is the assessment we start your personal training program with. It gives us a baseline, so we can measure your progress against where you started.</p>",
+         "The Core 4 is the assessment we start your personal training program with. It gives us a baseline, so we can measure your progress against where you started."),
+        ("What is the difference between private and semi private training?",
+         "<p>Private training is one on one with your trainer. Semi private training is a small group session with the same program focus.</p>",
+         "Private training is one on one with your trainer. Semi private training is a small group session with the same program focus."),
+        ("I sent a message through the website. What happens to it?",
+         f'<p>It goes to our <a href="mailto:{EMAIL}">{EMAIL}</a> inbox, and we reply from there. We keep messages for 6 months. Please do not include medical details in the form.</p>',
+         f"It goes to our {EMAIL} inbox, and we reply from there. We keep messages for 6 months. Please do not include medical details in the form."),
+    ]
+    items = "".join(
+        f'<details class="faq__item"><summary>{e(q)}</summary><div class="faq__a">{a}</div></details>'
+        for q, a, _ in QA)
+    ld = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{"@type": "Question", "name": q,
+                        "acceptedAnswer": {"@type": "Answer", "text": t}} for q, _, t in QA],
+    }, ensure_ascii=False)
+    body = hero("FAQ", "Quick answers<br>before you come in",
+                "The things new clients ask us most. Can't find yours? Call or email and we'll help.",
+                book_btn("Book Now", "btn--light"), "hero--short")
+    body += f"""
+<section class="section" aria-label="Frequently asked questions">
+  <div class="container faq">
+    {items}
+  </div>
+</section>
+"""
+    body += cta_band("Still have a question?", "Call or email and a real person will get back to you.")
+    return page("/faq/", "FAQ",
+                f"Answers about training, booking, hours and location at Better Forever in {ADDR_CITY}, {ADDR_REGION}.",
+                body, "", schema=True,
+                extra_ld='<script type="application/ld+json">' + ld + "</script>")
+
+
 def build_all(prefix, css, theme):
     global PREFIX, CSS, THEME
     PREFIX, CSS, THEME = prefix, css, theme
     urls = [build_home(), build_pain(), build_perform(), build_young(),
             build_team(), build_contact(), build_book(),
-            build_privacy(), build_terms()]
+            build_faq(), build_privacy(), build_terms()]
     build_joel()  # hidden: deliberately not in the returned list, so never in the sitemap
     return urls
