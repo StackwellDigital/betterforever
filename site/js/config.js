@@ -20,7 +20,7 @@ window.BF_CONFIG = {
     practitioners: {
       berghamer: "https://betterforeverclinic.janeapp.com/#/staff_member/7",
       kawamoto: "https://betterforeverclinic.janeapp.com/#/staff_member/4",
-      joel: "",
+      joel: "https://betterforeverclinic.janeapp.com/#/staff_member/019f80e4-2c64-7988-a839-d59acbdb2ebb",
       cam: "https://betterforeverclinic.janeapp.com/#/staff_member/6",
       marina: "https://betterforeverclinic.janeapp.com/#/staff_member/5"
     }
