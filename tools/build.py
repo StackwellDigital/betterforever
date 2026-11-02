@@ -3,6 +3,8 @@
 
 Page copy, header and footer live in tools/classic.py; styles in site/css/classic.css.
 Set DEMO = False below at launch (removes noindex and opens robots.txt).
+Also writes functions/_lib/shell.js (header, footer, head for the blog Functions). Commit it with the HTML.
+site/sitemap.xml here is the static fallback: functions/sitemap.xml.js serves the live one with blog posts added.
 """
 import sys
 from pathlib import Path
@@ -32,7 +34,7 @@ if __name__ == "__main__":
     urls = classic.build_all("", ["/css/classic.css"], "theme-classic")
     build_404()
     (OUT / "robots.txt").write_text(
-        "User-agent: *\nDisallow: /\n" if DEMO else f"User-agent: *\nDisallow: /joel/\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n",
+        "User-agent: *\nDisallow: /\n" if DEMO else f"User-agent: *\nDisallow: /joel/\nDisallow: /admin/\nDisallow: /api/\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n",
         encoding="utf-8")
     if DEMO:
         (OUT / "sitemap.xml").unlink(missing_ok=True)

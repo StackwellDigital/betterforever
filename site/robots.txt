@@ -1,4 +1,6 @@
 User-agent: *
 Disallow: /joel/
+Disallow: /admin/
+Disallow: /api/
 Allow: /
 Sitemap: https://www.betterforever.ca/sitemap.xml

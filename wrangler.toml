@@ -1,0 +1,20 @@
+# Cloudflare Pages project: betterforever
+# Bindings for the blog live here (the D1 binding UI is broken on this account, so declare them in this file).
+# Secrets stay in the dashboard: Pages > Settings > Variables and Secrets
+#   RESEND_API_KEY      send only key for /api/inquiry
+#   ACCESS_TEAM_DOMAIN  e.g. stackwell.cloudflareaccess.com (Zero Trust team domain, no https://)
+#   ACCESS_AUD          Application Audience (AUD) tag of the Access app that protects /admin and /api/admin.
+#                       Comma separate two tags if the preview deployments use their own Access app.
+name = "betterforever"
+pages_build_output_dir = "site"
+compatibility_date = "2025-10-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "betterforever-blog"
+database_id = "45e02e06-1f13-4223-a241-8726cc8b6a95"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "betterforever-blog-media"
