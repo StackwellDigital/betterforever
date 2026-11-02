@@ -134,7 +134,8 @@
     $("btn-delete").hidden = !post;
     var v = $("btn-view");
     v.hidden = !(post && st === "live");
-    if (!v.hidden) v.href = "/blog/" + post.slug + "/";
+    // The editor lives on the pages.dev address (Access cannot protect www while its DNS is at GoDaddy), so link to the real site
+    if (!v.hidden) v.href = (/\.pages\.dev$/.test(location.hostname) ? "https://www.betterforever.ca" : "") + "/blog/" + post.slug + "/";
     $("f-slug").readOnly = !!published;
     $("slug-hint").textContent = published
       ? "This post is live, so the address is locked. Unpublish it first to change it."
