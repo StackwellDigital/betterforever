@@ -90,7 +90,7 @@ TEAM = [
         ],
     },
     {
-        "key": "marina", "initials": "MM",
+        "key": "marina", "initials": "MM", "photo": "/img/marina.jpg",
         "name": "Marina McCain",
         "role": "Registered Kinesiologist - Complex Rehab",
         "short": "Book with Marina",
