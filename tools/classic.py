@@ -66,7 +66,6 @@ TEAM = [
     },
     {
         "key": "joel", "initials": "JM", "photo": "/img/joel.avif",
-        "bookable": False,  # not taking new clients: no booking button on /team/ or /book/. /joel/ (hidden) keeps its link for existing clients
         "name": "Joel McCain",
         "role": "Head Trainer - Creator of CORE4 & CORE4+",
         "short": "Book with Joel",
