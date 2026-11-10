@@ -77,7 +77,7 @@ TEAM = [
         ],
     },
     {
-        "key": "cam", "initials": "CB",
+        "key": "cam", "initials": "CB", "photo": "/img/cam.jpg",
         "name": "Cam Bennett",
         "role": "Strength and Performance Coach",
         "short": "Book with Cam",
