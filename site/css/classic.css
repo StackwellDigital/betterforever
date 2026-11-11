@@ -463,9 +463,12 @@ ul { margin: 0; padding: 0; }
 .post__back { margin-top: 2.5rem; font-weight: 700; }
 .post__back a { text-decoration: none; }
 
-/* Job postings */
+/* Job postings (flat cards, no shadow, matches contact page info cards) */
+.perk { background: var(--color-white); border-radius: var(--radius-xl); padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid rgba(203, 195, 187, .45); }
+.perk h3 { font-size: .8125rem; letter-spacing: .12em; margin-bottom: .5rem; }
+.perk p { margin: 0; font-size: 1.0625rem; font-weight: 600; }
 .job-list { display: grid; gap: clamp(1.25rem, 3vw, 2rem); }
-.job { background: var(--color-off-white); border-radius: var(--radius-xl); padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid rgba(203, 195, 187, .6); border-left: 6px solid var(--color-primary); }
+.job { background: var(--color-off-white); border-radius: var(--radius-xl); padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid rgba(203, 195, 187, .6); }
 .job__title { font-size: 1.5rem; margin-bottom: .5rem; }
 .job__details { display: grid; gap: .75rem; margin: 1.25rem 0 1.5rem; }
 .job__details dt { font-family: var(--font-heading); font-weight: 800; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--color-primary); }

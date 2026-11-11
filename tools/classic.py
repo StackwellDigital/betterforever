@@ -1055,7 +1055,7 @@ JOB_PERKS = [
 
 def build_jobs():
     perks = "".join(
-        f'<div class="stat-card"><h3 class="stat-card__h">{e(h)}</h3><p>{t}</p></div>' for h, t in JOB_PERKS)
+        f'<div class="perk"><h3>{e(h)}</h3><p>{t}</p></div>' for h, t in JOB_PERKS)
     jobs = ""
     for j in JOBS:
         det = "".join(f"<div><dt>{e(k)}</dt><dd>{v}</dd></div>" for k, v in j["details"])
