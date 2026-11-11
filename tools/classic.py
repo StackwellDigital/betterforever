@@ -1072,9 +1072,14 @@ def build_jobs():
                 "hero--short")
     body += f"""
 <section class="section" aria-label="Why work at Better Forever">
-  <div class="container">
-    <div class="section-head"><p class="eyebrow">Why Better Forever</p><h2>A center built around people</h2></div>
-    <div class="grid grid--4">{perks}</div>
+  <div class="container job-intro">
+    <figure class="job-photo"><img src="/img/front-desk.jpg" width="800" height="1000" alt="The front desk and logo wall at the Better Forever center" decoding="async"></figure>
+    <div class="job-intro__text">
+      <p class="eyebrow">Why Better Forever</p>
+      <h2>A center built around people</h2>
+      <p>{todo("Short paragraph on why people enjoy working at Better Forever, supplied by the center")}</p>
+      <div class="job-perks">{perks}</div>
+    </div>
   </div>
 </section>
 <section class="section section--white" aria-label="Current openings">
