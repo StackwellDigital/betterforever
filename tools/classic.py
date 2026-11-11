@@ -1047,8 +1047,8 @@ JOBS = [
 JOB_EMAIL = "admin@betterforever.ca"  # careers inquiries only, site wide email stays info@
 JOB_PERKS = [
     ("Location", f"{e(ADDR_STREET)}, {ADDR_CITY}, {ADDR_REGION}."),
-    ("Facility", todo("Describe the space and facility")),
-    ("Support", todo("Describe admin and ownership support")),
+    ("Facility", "Gym access is available 24/7, with room for private and semi private training and practitioner care all under one roof."),
+    ("Support", "Clients book online and need no referral, and we offer direct billing, so more of your time goes to your clients."),
     ("Multi Disciplinary", "Personal training, chiropractic, kinesiology, registered massage therapy and naturopathic care under one roof."),
 ]
 
@@ -1077,7 +1077,7 @@ def build_jobs():
     <div class="job-intro__text">
       <p class="eyebrow">Why Better Forever</p>
       <h2>A center built around people</h2>
-      <p>{todo("Short paragraph on why people enjoy working at Better Forever, supplied by the center")}</p>
+      <p>Better Forever is a training and care center in Langley, BC. Trainers and practitioners work as one team, with every client’s plan built around the Core 4 assessment. If you want to do your best work alongside people who share that approach, we would like to hear from you.</p>
       <div class="job-perks">{perks}</div>
     </div>
   </div>
