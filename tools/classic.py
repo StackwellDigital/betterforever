@@ -8,6 +8,7 @@ All copy comes from the client's existing preview site; nothing is invented.
 import json
 import html
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "site"
@@ -211,7 +212,7 @@ def header(current):
 
 def footer():
     all_links = "".join(f'<li><a href="{h}">{e(l)}</a></li>' for h, l in
-                        [("/", "Home")] + NAV + NAV_RIGHT + [("/faq/", "FAQ"), ("/book/", "Book Now")])
+                        [("/", "Home")] + NAV + NAV_RIGHT + [("/faq/", "FAQ"), ("/job-postings/", "Careers"), ("/book/", "Book Now")])
     return f"""<footer class="site-footer">
   <div class="container site-footer__grid">
     <div>
@@ -1018,6 +1019,80 @@ def build_faq():
                 extra_ld='<script type="application/ld+json">' + ld + "</script>")
 
 
+# ---------------------------------------------------------------- job postings
+# Posting copy is placeholder until the center supplies it. Edit JOBS only.
+# Each job: title, intro, details [(label, value)], email subject. Wrap placeholders in todo().
+JOBS = [
+    {
+        "title": "Job Title One",
+        "intro": todo("Intro line for this role, supplied by Better Forever"),
+        "details": [
+            ("Position", todo("Employment type")),
+            ("Compensation", todo("Pay or compensation details")),
+            ("Hours", todo("Days and hours available")),
+            ("Mentorship", todo("Mentorship or support offered")),
+        ],
+    },
+    {
+        "title": "Job Title Two",
+        "intro": todo("Intro line for this role, supplied by Better Forever"),
+        "details": [
+            ("Position", todo("Employment type")),
+            ("Compensation", todo("Pay or compensation details")),
+            ("Hours", todo("Days and hours available")),
+            ("Mentorship", todo("Mentorship or support offered")),
+        ],
+    },
+]
+JOB_PERKS = [
+    ("Location", f"{e(ADDR_STREET)}, {ADDR_CITY}, {ADDR_REGION}."),
+    ("Facility", todo("Describe the space and facility")),
+    ("Support", todo("Describe admin and ownership support")),
+    ("Multi Disciplinary", "Personal training, chiropractic, kinesiology, registered massage therapy and naturopathic care under one roof."),
+]
+
+
+def build_jobs():
+    perks = "".join(
+        f'<div class="stat-card"><h3 class="stat-card__h">{e(h)}</h3><p>{t}</p></div>' for h, t in JOB_PERKS)
+    jobs = ""
+    for j in JOBS:
+        det = "".join(f"<div><dt>{e(k)}</dt><dd>{v}</dd></div>" for k, v in j["details"])
+        subj = quote("Application: " + j["title"])
+        jobs += f"""<article class="job">
+  <h3 class="job__title">{e(j['title'])}</h3>
+  <p class="job__intro">{j['intro']}</p>
+  <dl class="job__details">{det}</dl>
+  <a class="btn btn--primary btn--sm" href="mailto:{EMAIL}?subject={subj}">Email us to apply</a>
+</article>"""
+    body = hero("Careers", "Come work<br>with us",
+                "[Short intro about working at Better Forever, supplied by the center]",
+                f'<a class="btn btn--light" href="mailto:{EMAIL}?subject={quote("Job inquiry")}">Email Us</a>',
+                "hero--short")
+    body += f"""
+<section class="section" aria-label="Why work at Better Forever">
+  <div class="container">
+    <div class="section-head"><p class="eyebrow">Why Better Forever</p><h2>A center built around people</h2></div>
+    <div class="grid grid--4">{perks}</div>
+  </div>
+</section>
+<section class="section section--white" aria-label="Current openings">
+  <div class="container">
+    <div class="section-head"><p class="eyebrow">Current openings</p><h2>Professional services</h2></div>
+    <div class="job-list">{jobs}</div>
+    <div class="job-note">
+      <h2>Administrative services</h2>
+      <p>{todo("Admin openings status, for example: no current openings, email us if you would like to be considered for future roles")}</p>
+      <a class="btn btn--outline btn--sm" href="mailto:{EMAIL}?subject={quote("Job inquiry")}">{EMAIL}</a>
+    </div>
+  </div>
+</section>
+"""
+    return page("/job-postings/", "Job Postings",
+                f"Current openings at Better Forever in {ADDR_CITY}, {ADDR_REGION}. Email us to apply.",
+                body, "")
+
+
 # ---------------------------------------------------------------- blog shell (for Pages Functions)
 def _security_headers():
     """Read the /* block of site/_headers so function responses carry the same headers as static pages."""
@@ -1066,7 +1141,7 @@ def build_all(prefix, css, theme):
     PREFIX, CSS, THEME = prefix, css, theme
     urls = [build_home(), build_pain(), build_perform(), build_young(),
             build_team(), build_contact(), build_book(),
-            build_faq(), build_privacy(), build_terms()]
+            build_faq(), build_privacy(), build_terms(), build_jobs()]
     build_joel()  # hidden: deliberately not in the returned list, so never in the sitemap
     urls.append(SITE_URL + "/blog/")  # served by functions/blog/index.js
     emit_blog_shell(urls)
