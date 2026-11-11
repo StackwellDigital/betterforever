@@ -1086,11 +1086,6 @@ def build_jobs():
   <div class="container">
     <div class="section-head"><p class="eyebrow">Current openings</p><h2>Professional services</h2></div>
     <div class="job-list">{jobs}</div>
-    <div class="job-note">
-      <h2>Administrative services</h2>
-      <p>{todo("Admin openings status, for example: no current openings, email us if you would like to be considered for future roles")}</p>
-      <a class="btn btn--outline btn--sm" href="mailto:{JOB_EMAIL}?subject={quote("Job inquiry")}">{JOB_EMAIL}</a>
-    </div>
   </div>
 </section>
 """
