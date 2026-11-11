@@ -212,7 +212,7 @@ def header(current):
 
 def footer():
     all_links = "".join(f'<li><a href="{h}">{e(l)}</a></li>' for h, l in
-                        [("/", "Home")] + NAV + NAV_RIGHT + [("/faq/", "FAQ"), ("/job-postings/", "Careers"), ("/book/", "Book Now")])
+                        [("/", "Home")] + NAV + NAV_RIGHT + [("/faq/", "FAQ"), ("/job-postings/", "Join the Team"), ("/book/", "Book Now")])
     return f"""<footer class="site-footer">
   <div class="container site-footer__grid">
     <div>
