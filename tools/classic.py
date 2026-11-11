@@ -1044,6 +1044,7 @@ JOBS = [
         ],
     },
 ]
+JOB_EMAIL = "admin@betterforever.ca"  # careers inquiries only, site wide email stays info@
 JOB_PERKS = [
     ("Location", f"{e(ADDR_STREET)}, {ADDR_CITY}, {ADDR_REGION}."),
     ("Facility", todo("Describe the space and facility")),
@@ -1063,11 +1064,11 @@ def build_jobs():
   <h3 class="job__title">{e(j['title'])}</h3>
   <p class="job__intro">{j['intro']}</p>
   <dl class="job__details">{det}</dl>
-  <a class="btn btn--primary btn--sm" href="mailto:{EMAIL}?subject={subj}">Email us to apply</a>
+  <a class="btn btn--primary btn--sm" href="mailto:{JOB_EMAIL}?subject={subj}">Email us to apply</a>
 </article>"""
     body = hero("Careers", "Come work<br>with us",
                 "[Short intro about working at Better Forever, supplied by the center]",
-                f'<a class="btn btn--light" href="mailto:{EMAIL}?subject={quote("Job inquiry")}">Email Us</a>',
+                f'<a class="btn btn--light" href="mailto:{JOB_EMAIL}?subject={quote("Job inquiry")}">Email Us</a>',
                 "hero--short")
     body += f"""
 <section class="section" aria-label="Why work at Better Forever">
@@ -1083,7 +1084,7 @@ def build_jobs():
     <div class="job-note">
       <h2>Administrative services</h2>
       <p>{todo("Admin openings status, for example: no current openings, email us if you would like to be considered for future roles")}</p>
-      <a class="btn btn--outline btn--sm" href="mailto:{EMAIL}?subject={quote("Job inquiry")}">{EMAIL}</a>
+      <a class="btn btn--outline btn--sm" href="mailto:{JOB_EMAIL}?subject={quote("Job inquiry")}">{JOB_EMAIL}</a>
     </div>
   </div>
 </section>
